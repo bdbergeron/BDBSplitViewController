@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Bradley Bergeron. All rights reserved.
 //
 
-#import "BDBSplitViewController.h"
 #import "MasterViewController.h"
+#import "BDBSplitViewController.h"
 
 
 #pragma mark -
@@ -18,6 +18,16 @@
 
 #pragma mark -
 @implementation MasterViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.title = @"Master View";
+
+    self.navigationItem.leftBarButtonItem = self.splitViewController.closeMasterViewButtonItem;
+
+    self.tableView.rowHeight = 90.0;
+}
 
 #pragma mark UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

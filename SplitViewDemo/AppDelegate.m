@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "BDBSplitViewController.h"
+#import "MasterViewController.h"
+#import "DetailViewController.h"
 
 
 #pragma mark -
@@ -15,10 +17,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    BDBSplitViewController *splitViewController = (BDBSplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    splitViewController.delegate = (id)navigationController.topViewController;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+
+    BDBSplitViewController *splitViewController = [[BDBSplitViewController alloc] initWithMasterViewController:[MasterViewController new]
+                                                                                          detailViewController:[[DetailViewController alloc] initWithNibName:nil bundle:nil]];
+
+    self.window.rootViewController = splitViewController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

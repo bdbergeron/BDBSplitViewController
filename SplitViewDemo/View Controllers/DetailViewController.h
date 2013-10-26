@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BDBSplitViewController.h"
+
 
 #pragma mark -
-@interface DetailViewController : UIViewController
+@interface DetailViewController : BDBDetailViewController
 <UISplitViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIView *labelContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *twitterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *githubLabel;
 
 @end
