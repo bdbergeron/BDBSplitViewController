@@ -195,11 +195,14 @@
     self.masterViewController.view.alpha = (hidden) ? 0.0 : 1.0;
 }
 
+- (CGFloat)detailDimmingViewOpacity
+{
+    return CGColorGetAlpha(self.detailDimmingView.backgroundColor.CGColor);
+}
+
 - (void)setDetailDimmingViewOpacity:(CGFloat)opacity;
 {
     NSAssert(opacity >= 0.0 && opacity <= 1.0, @"Opacity must be between 0 and 1.");
-
-    _detailDimmingViewOpacity = opacity;
     self.detailDimmingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:opacity];
 }
 
