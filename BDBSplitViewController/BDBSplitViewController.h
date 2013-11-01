@@ -10,6 +10,12 @@
 
 @protocol BDBSplitViewControllerDelegate;
 
+typedef enum {
+    BDBMasterViewDisplayStyleNormal,
+    BDBMasterViewDisplayStyleSticky,
+    BDBMasterViewDisplayStyleDrawer
+} BDBMasterViewDisplayStyle;
+
 
 #pragma mark -
 @interface BDBSplitViewController : UISplitViewController
@@ -20,12 +26,13 @@
 @property (nonatomic, strong, readonly) UIBarButtonItem *showHideMasterViewButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *closeMasterViewButtonItem;
 
-@property (nonatomic, assign, readonly) BOOL masterViewIsHidden;
+@property (nonatomic) BDBMasterViewDisplayStyle masterViewDisplayStyle;
+@property (nonatomic, assign, readonly)  BOOL masterViewIsHidden;
+@property (nonatomic, assign, readwrite) BOOL masterViewShouldDismissOnTap;
 
-@property (nonatomic, assign) BOOL shouldDimDetailView;
-@property (nonatomic) CGFloat detailDimmingViewOpacity;
+@property (nonatomic, assign, readwrite) BOOL detailViewShouldDim;
+@property (nonatomic) CGFloat detailViewDimmingOpacity;
 
-@property (nonatomic, assign) BOOL shouldDismissMasterViewOnTap;
 
 #pragma mark Initialization
 - (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
@@ -48,5 +55,9 @@
 #pragma mark -
 @interface BDBDetailViewController : UIViewController
 <UISplitViewControllerDelegate>
+
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation;
 
 @end

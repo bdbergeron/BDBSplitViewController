@@ -24,6 +24,7 @@
 
     self.title = @"Detail View";
 
+    self.splitViewController.masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
     self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
