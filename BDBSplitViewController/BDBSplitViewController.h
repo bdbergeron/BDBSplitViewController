@@ -26,11 +26,12 @@ typedef enum {
 @property (nonatomic, strong, readonly) UIBarButtonItem *showHideMasterViewButtonItem;
 @property (nonatomic, strong, readonly) UIBarButtonItem *closeMasterViewButtonItem;
 
-@property (nonatomic) BDBMasterViewDisplayStyle masterViewDisplayStyle;
 @property (nonatomic, assign, readonly)  BOOL masterViewIsHidden;
-@property (nonatomic, assign, readwrite) BOOL masterViewShouldDismissOnTap;
 
-@property (nonatomic, assign, readwrite) BOOL detailViewShouldDim;
+@property (nonatomic) BDBMasterViewDisplayStyle masterViewDisplayStyle;
+@property (nonatomic, assign) BOOL masterViewShouldDismissOnTap;
+
+@property (nonatomic, assign) BOOL detailViewShouldDim;
 @property (nonatomic) CGFloat detailViewDimmingOpacity;
 
 

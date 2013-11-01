@@ -40,25 +40,41 @@ Finally, if you ever need to determine whether or not the master view is visible
 @property (nonatomic, assign, readonly) BOOL masterViewIsHidden;
 ```
 
-### Customization
+## Display Styles
+
+To change the style in which BDBSplitViewController displays the master and detail views, you can change the `masterViewDisplayStyle` property.
+
+`BDBMasterViewDisplayStyleNormal`
+
+Normal mimics the behavior of the standard UISplitViewController wiht added support for showing and hiding the master view on command. Device rotation will reset the master view display state.
+
+`BDBMasterViewDisplayStyleSticky`
+
+Sticky allows for the master view to be pinned open or closed without being affected by device rotation.
+
+`BDBMasterViewDisplayStyleDrawer`
+
+Drawer was the original style I created for BDBSplitViewController. The detail view occupies the entire screen, and the master view slides in on top of the detail view. The detail view is dimmed while the master view is visible.
+
+## Customization
 
 ```objc
-@property (nonatomic, assign) BOOL shouldDimDetailView;
+@property (nonatomic, assign) BOOL masterViewShouldDismissOnTap;
 ```
 
-When the master view controller is shown, the detail view gets dimmed by default.
+To quickly dismiss the master view, a user can simply tap on the dimmed detail view. Default is NO for Normal and Sticky styles, YES for Drawer.
 
 ```objc
-@property (nonatomic) CGFloat detailDimmingViewOpacity;
+@property (nonatomic, assign) BOOL detailViewShouldDim;
 ```
 
-You can change the default dimming opacity if you want. The default is 0.4.
+When the master view controller is shown, the detail view gets dimmed. Default is NO for Normal and Sticky style, YES for Drawer.
 
 ```objc
-@property (nonatomic, assign) BOOL shouldDismissMasterViewOnTap;
+@property (nonatomic) CGFloat detailViewDimmingOpacity;
 ```
 
-To quickly dismiss the master view, a user can simply tap on the dimmed detail view. You can enable or disable this functionality using this property.
+You can change the default dimming opacity if you want. The default is 0.4. Has no effect unless `detailViewShouldDim` is set to YES.
 
 ## Credits
 
