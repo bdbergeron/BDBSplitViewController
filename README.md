@@ -2,6 +2,8 @@
 
 BDBSplitViewController is a nice drop-in replacement for UISplitViewController with a few fancy features.
 
+![Drawer Demo](https://dl.dropboxusercontent.com/u/6225/GitHub/BDBSplitViewController/Drawer.gif)
+
 ## Usage
 
 BDBSplitViewController contains just a few simple properties and methods that allow you to get your app running and looking good in no time. Take a look at the included demo app for a quick run-down on how to implement it in your app!
@@ -42,23 +44,25 @@ Finally, if you ever need to determine whether or not the master view is visible
 
 To change the style in which BDBSplitViewController displays the master and detail views, you can change the `masterViewDisplayStyle` property.
 
-### BDBMasterViewDisplayStyleNormal
+```objc
+typedef enum {
+    BDBMasterViewDisplayStyleNormal,
+    BDBMasterViewDisplayStyleSticky,
+    BDBMasterViewDisplayStyleDrawer
+} BDBMasterViewDisplayStyle;
+```
 
-Normal mimics the behavior of the standard UISplitViewController wiht added support for showing and hiding the master view on command. Device rotation will reset the master view display state.
+### Normal
 
-![Normal Demo](https://dl.dropboxusercontent.com/u/6225/GitHub/BDBSplitViewController/Normal.gif)
+The Normal style mimics the behavior of the standard UISplitViewController wiht added support for showing and hiding the master view on command. Device rotation will reset the master view display state.
 
-### BDBMasterViewDisplayStyleSticky
+### Sticky
 
 Sticky allows for the master view to be pinned open or closed without being affected by device rotation.
 
-![Sticky Demo](https://dl.dropboxusercontent.com/u/6225/GitHub/BDBSplitViewController/Sticky.gif)
-
-### BDBMasterViewDisplayStyleDrawer
+### Drawer
 
 Drawer was the original style I created for BDBSplitViewController. The detail view occupies the entire screen, and the master view slides in on top of the detail view. The detail view is dimmed while the master view is visible.
-
-![Drawer Demo](https://dl.dropboxusercontent.com/u/6225/GitHub/BDBSplitViewController/Drawer.gif)
 
 ## Customization
 
