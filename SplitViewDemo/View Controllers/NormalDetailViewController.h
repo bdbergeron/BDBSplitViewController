@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  NormalDetailViewController.h
 //  SplitViewDemo
 //
 //  Created by Bradley Bergeron on 10/25/13.
@@ -12,7 +12,7 @@
 
 
 #pragma mark -
-@interface DetailViewController : BDBDetailViewController
+@interface NormalDetailViewController : BDBDetailViewController
 <UISplitViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *labelContainerView;

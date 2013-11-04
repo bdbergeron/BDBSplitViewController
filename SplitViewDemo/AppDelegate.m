@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "BDBSplitViewController.h"
 #import "MasterViewController.h"
-#import "DetailViewController.h"
+#import "NormalDetailViewController.h"
 
 
 #pragma mark -
@@ -21,7 +21,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
     BDBSplitViewController *splitViewController = [[BDBSplitViewController alloc] initWithMasterViewController:[MasterViewController new]
-                                                                                          detailViewController:[[DetailViewController alloc] initWithNibName:nil bundle:nil]];
+                                                                                          detailViewController:[[NormalDetailViewController alloc] initWithNibName:nil bundle:nil]];
 
     self.window.rootViewController = splitViewController;
     [self.window makeKeyAndVisible];

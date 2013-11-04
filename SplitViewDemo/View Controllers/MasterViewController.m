@@ -11,12 +11,6 @@
 
 
 #pragma mark -
-@interface MasterViewController ()
-
-@end
-
-
-#pragma mark -
 @implementation MasterViewController
 
 - (void)viewDidLoad
@@ -37,13 +31,66 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell; //= [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    if (!cell)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+
+    switch (indexPath.row)
+    {
+        case 2:
+        {
+            cell.textLabel.text = @"Drawer Style";
+            break;
+        }
+        case 1:
+        {
+            cell.textLabel.text = @"Sticky Style";
+            break;
+        }
+        case 0:
+        default:
+        {
+            cell.textLabel.text = @"Normal Style";
+            break;
+        }
+    }
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.splitViewController hideMasterViewControllerAnimated:YES completion:^{
+        BDBDetailViewController *detailView;
+        switch (indexPath.row)
+        {
+            case 2:
+            {
+                detailView = [[NSClassFromString(@"DrawerDetailViewController") alloc] init];
+                break;
+            }
+            case 1:
+            {
+                detailView = [[NSClassFromString(@"StickyDetailViewController") alloc] init];
+                break;
+            }
+            case 0:
+            default:
+            {
+                detailView = [[NSClassFromString(@"NormalDetailViewController") alloc] init];
+                break;
+            }
+        }
+
+        UIViewController *currentDetailView = [(UINavigationController *)self.splitViewController.detailViewController topViewController];
+        if (![currentDetailView isKindOfClass:[detailView class]])
+            [self.splitViewController setDetailViewController:detailView];
+    }];
 }
 
 @end

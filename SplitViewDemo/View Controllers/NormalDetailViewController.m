@@ -1,22 +1,16 @@
 //
-//  DetailViewController.m
+//  NormalDetailViewController.m
 //  SplitViewDemo
 //
 //  Created by Bradley Bergeron on 10/25/13.
 //  Copyright (c) 2013 Bradley Bergeron. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "NormalDetailViewController.h"
 
 
 #pragma mark -
-@interface DetailViewController ()
-
-@end
-
-
-#pragma mark -
-@implementation DetailViewController
+@implementation NormalDetailViewController
 
 - (void)viewDidLoad
 {

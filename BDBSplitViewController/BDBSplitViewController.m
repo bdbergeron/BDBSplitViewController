@@ -16,6 +16,9 @@ typedef enum {
 } BDBMasterViewState;
 
 
+static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
+
+
 #pragma mark -
 @interface BDBSplitViewController ()
 
@@ -67,11 +70,6 @@ typedef enum {
             }];
             self.viewControllers = mutableViewControllers;
         }
-
-        if ([dvc isKindOfClass:[BDBDetailViewController class]])
-            self.delegate = (BDBDetailViewController *)dvc;
-
-        [self.detailViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     }
     return self;
 }
@@ -204,17 +202,25 @@ typedef enum {
 {
     NSAssert(viewControllers && viewControllers.count == 2, @"viewControllers must contain a master and a detail view controller.");
 
+    self.delegate = nil;
+    [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
+
     [super setViewControllers:viewControllers];
+
+    [self.detailViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:kBDBSplitViewKVOContext];
+
+    UIViewController *dvc = [(UINavigationController *)viewControllers[1] topViewController];
+    if ([dvc isKindOfClass:[BDBDetailViewController class]])
+        self.delegate = (BDBDetailViewController *)dvc;
+
     [self configureMasterView];
 }
 
 #pragma mark Master / Detail Accessors
 - (UIViewController *)masterViewController
 {
-    if (self.viewControllers.count < 1)
-        return nil;
-    else
-        return self.viewControllers[0];
+    NSAssert(self.viewControllers.count > 0, @"self.viewControllers does not conatin a master view controller.");
+    return self.viewControllers[0];
 }
 
 - (UIViewController *)detailViewController
