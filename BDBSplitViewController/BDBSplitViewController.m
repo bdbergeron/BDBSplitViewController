@@ -5,9 +5,11 @@
 //  Copyright (c) 2013 Bradley Bergeron. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "BDBSplitViewController.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "UIImage+CudaIcons.h"
 
 
 typedef enum {
@@ -16,7 +18,7 @@ typedef enum {
 } BDBMasterViewState;
 
 
-static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
+static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 
 #pragma mark -
@@ -48,6 +50,16 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
 @implementation BDBSplitViewController
 
 #pragma mark Initialization
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc
+{
+    return [[[self class] alloc] initWithMasterViewController:mvc detailViewController:dvc];
+}
+
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style
+{
+    return [[[self class] alloc] initWithMasterViewController:mvc detailViewController:dvc style:style];
+}
+
 - (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc
 {
     NSParameterAssert(mvc);
@@ -70,6 +82,18 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
             }];
             self.viewControllers = mutableViewControllers;
         }
+    }
+    return self;
+}
+
+- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style
+{
+    NSParameterAssert(style);
+
+    self = [self initWithMasterViewController:mvc detailViewController:dvc];
+    if (self)
+    {
+        self.masterViewDisplayStyle = style;
     }
     return self;
 }
@@ -140,7 +164,7 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
     self.detailTapGesture.numberOfTouchesRequired = 1;
     [self.detailDimmingView addGestureRecognizer:self.detailTapGesture];
 
-    self.masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
+    self.masterViewAnimationDuration = 0.3;
 }
 
 - (void)configureMasterView
@@ -368,9 +392,14 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
     if (self.masterViewShouldDismissOnTap)
         self.detailTapGesture.enabled = YES;
 
+    if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerWillShowMasterViewController:)])
+        [self.svcDelegate splitViewControllerWillShowMasterViewController:self];
+
+    [self.masterViewController viewWillAppear:animated];
+
     if (animated)
     {
-        [UIView animateWithDuration:0.3
+        [UIView animateWithDuration:self.masterViewAnimationDuration
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -381,6 +410,7 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
                          completion:^(BOOL finished) {
                              self.showHideMasterViewButtonItem.title = @"Hide";
 
+                             [self.masterViewController viewDidAppear:animated];
                              [self.view setNeedsLayout];
 
                              if (completion)
@@ -391,6 +421,7 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
     {
         self.showHideMasterViewButtonItem.title = @"Hide";
 
+        [self.masterViewController viewDidAppear:animated];
         [self.view setNeedsLayout];
 
         if (completion)
@@ -402,9 +433,14 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
 {
     self.masterViewState = BDBMasterViewStateHidden;
 
+    if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerWillHideMasterViewController:)])
+        [self.svcDelegate splitViewControllerWillHideMasterViewController:self];
+
+    [self.masterViewController viewWillDisappear:animated];
+
     if (animated)
     {
-        [UIView animateWithDuration:0.3
+        [UIView animateWithDuration:self.masterViewAnimationDuration
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -419,6 +455,7 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
 
                              self.showHideMasterViewButtonItem.title = @"Show";
 
+                             [self.masterViewController viewDidDisappear:animated];
                              [self.view setNeedsLayout];
 
                              if (completion)
@@ -433,6 +470,7 @@ static void * const kBDBSplitViewKVOContext = (void*)&kBDBSplitViewKVOContext;
 
         self.showHideMasterViewButtonItem.title = @"Show";
 
+        [self.masterViewController viewDidDisappear:animated];
         [self.view setNeedsLayout];
 
         if (completion)

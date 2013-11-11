@@ -20,6 +20,8 @@ typedef enum {
 #pragma mark -
 @interface BDBSplitViewController : UISplitViewController
 
+@property (nonatomic) id <BDBSplitViewControllerDelegate> svcDelegate;
+
 @property (nonatomic, strong, readonly) UIViewController *masterViewController;
 @property (nonatomic, strong)           UIViewController *detailViewController;
 
@@ -30,17 +32,33 @@ typedef enum {
 
 @property (nonatomic) BDBMasterViewDisplayStyle masterViewDisplayStyle;
 @property (nonatomic, assign) BOOL masterViewShouldDismissOnTap;
+@property (nonatomic) CGFloat masterViewAnimationDuration;
 
 @property (nonatomic, assign) BOOL detailViewShouldDim;
 @property (nonatomic) CGFloat detailViewDimmingOpacity;
 
 
 #pragma mark Initialization
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle) style;
+
 - (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
+- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style;
 
 #pragma mark Show / Hide Master View
 - (void)showMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion;
 - (void)hideMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion;
+
+@end
+
+
+#pragma mark -
+@protocol BDBSplitViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)splitViewControllerWillShowMasterViewController:(BDBSplitViewController *)svc;
+- (void)splitViewControllerWillHideMasterViewController:(BDBSplitViewController *)svc;
 
 @end
 
