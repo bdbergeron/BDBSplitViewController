@@ -13,7 +13,11 @@ BDBSplitViewController contains just a few simple properties and methods that al
 You can instantiate a new BDBSplitViewController instance programmatically, using XIBs, or using Storyboars, depending on your preferred flavor of UI development. If you are going the programmatic route, be sure to add `#include "BDBSplitViewController.h"` to the top of the header or implementation file for your master and detail view controllers. You must do this in order for Xcode to register the BDBSplitViewController methods and properties, otherwise it will think you're trying to access methods and properties of the standard UISplitViewController.
 
 ```objc
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle) style;
+
 - (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
+- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style;
 ```
 
 ### Master / Detail Views
@@ -83,6 +87,12 @@ When the master view controller is shown, the detail view gets dimmed. Default i
 ```
 
 You can change the default dimming opacity if you want. The default is 0.4. Has no effect unless `detailViewShouldDim` is set to YES.
+
+```objc
+@property (nonatomic) CGFloat masterViewAnimationDuration;
+```
+
+Customize the duration of the master view show/hide animation. Default is 0.3 seconds.
 
 ## Credits
 
