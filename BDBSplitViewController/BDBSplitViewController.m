@@ -9,8 +9,6 @@
 
 #import "BDBSplitViewController.h"
 
-#import "UIImage+CudaIcons.h"
-
 
 typedef enum {
     BDBMasterViewStateHidden,
