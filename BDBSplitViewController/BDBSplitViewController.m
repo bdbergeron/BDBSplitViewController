@@ -10,10 +10,11 @@
 #import "BDBSplitViewController.h"
 
 
-typedef enum {
+typedef NS_ENUM(NSInteger, BDBMasterViewState)
+{
     BDBMasterViewStateHidden,
     BDBMasterViewStateVisible
-} BDBMasterViewState;
+};
 
 
 static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
@@ -266,6 +267,11 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark Master View
 - (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style
 {
+    [self setMasterViewDisplayStyle:style animated:YES];
+}
+
+- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style animated:(BOOL)animated
+{
     _masterViewDisplayStyle = style;
 
     switch (style)
@@ -274,7 +280,6 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         {
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
-            [self showMasterViewControllerAnimated:NO completion:nil];
             break;
         }
 
@@ -282,7 +287,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         {
             self.detailViewShouldDim = YES;
             self.masterViewShouldDismissOnTap = YES;
-            [self hideMasterViewControllerAnimated:NO completion:nil];
+            [self hideMasterViewControllerAnimated:animated completion:nil];
             break;
         }
 
@@ -292,7 +297,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
             if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
-                [self showMasterViewControllerAnimated:NO completion:nil];
+                [self showMasterViewControllerAnimated:animated completion:nil];
+            else
+                [self hideMasterViewControllerAnimated:animated completion:nil];
             break;
         }
     }
@@ -378,6 +385,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark Show / Hide Master View
 - (void)showMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
+    if (!self.masterViewIsHidden)
+        return;
+
     self.masterViewState = BDBMasterViewStateVisible;
     self.masterViewController.view.alpha = 1.0;
 
@@ -429,6 +439,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 - (void)hideMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
+    if (self.masterViewIsHidden)
+        return;
+
     self.masterViewState = BDBMasterViewStateHidden;
 
     if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerWillHideMasterViewController:)])

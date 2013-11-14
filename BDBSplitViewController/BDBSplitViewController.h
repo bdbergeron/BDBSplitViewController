@@ -10,11 +10,12 @@
 
 @protocol BDBSplitViewControllerDelegate;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
+{
     BDBMasterViewDisplayStyleNormal,
     BDBMasterViewDisplayStyleSticky,
     BDBMasterViewDisplayStyleDrawer
-} BDBMasterViewDisplayStyle;
+};
 
 
 #pragma mark -
@@ -49,6 +50,9 @@ typedef enum {
 - (void)showMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion;
 - (void)hideMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion;
 
+#pragma mark Customization
+- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style animated:(BOOL)animated;
+
 @end
 
 
@@ -75,8 +79,6 @@ typedef enum {
 @interface BDBDetailViewController : UIViewController
 <UISplitViewControllerDelegate>
 
-- (BOOL)splitViewController:(UISplitViewController *)svc
-   shouldHideViewController:(UIViewController *)vc
-              inOrientation:(UIInterfaceOrientation)orientation;
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation;
 
 @end
