@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E8660D65182851EA0024870C /* StickyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8E73A86181B5E7B00F8BC1D /* StickyDetailViewController.xib */; };
-		E8660D66182852010024870C /* StickyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C61F4518284FA200DBA379 /* StickyDetailViewController.m */; };
-		E8942F71181B60F500D8D423 /* SSSocialCircle.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8942F6F181B60F500D8D423 /* SSSocialCircle.otf */; };
-		E8C61F4418284F8800DBA379 /* StickyDetailViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = E8C61F4318284F8800DBA379 /* StickyDetailViewController.h */; };
+		E8AEB28B18349E2000E5FA7B /* StickyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8AEB28A18349E2000E5FA7B /* StickyDetailViewController.xib */; };
+		E8AEB28D18349E5900E5FA7B /* StickyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AEB28C18349E5900E5FA7B /* StickyDetailViewController.m */; };
+		E8AEB29118349F4E00E5FA7B /* DrawerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8AEB29018349F4E00E5FA7B /* DrawerDetailViewController.m */; };
+		E8AEB29318349F5600E5FA7B /* DrawerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8AEB29218349F5600E5FA7B /* DrawerDetailViewController.xib */; };
 		E8C61F4818284FC600DBA379 /* NormalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8C61F4718284FC600DBA379 /* NormalDetailViewController.xib */; };
-		E8C61F4B1828507400DBA379 /* DrawerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C61F4A1828507400DBA379 /* DrawerDetailViewController.m */; };
-		E8C61F4D1828508400DBA379 /* DrawerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8C61F4C1828508400DBA379 /* DrawerDetailViewController.xib */; };
 		E8D1B3C1181B179900D4A6BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D1B3C0181B179900D4A6BA /* Foundation.framework */; };
 		E8D1B3C3181B179900D4A6BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D1B3C2181B179900D4A6BA /* CoreGraphics.framework */; };
 		E8D1B3C5181B179900D4A6BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D1B3C4181B179900D4A6BA /* UIKit.framework */; };
@@ -27,13 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E8942F6F181B60F500D8D423 /* SSSocialCircle.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SSSocialCircle.otf; sourceTree = "<group>"; };
-		E8C61F4318284F8800DBA379 /* StickyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyDetailViewController.h; sourceTree = "<group>"; };
-		E8C61F4518284FA200DBA379 /* StickyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyDetailViewController.m; sourceTree = "<group>"; };
+		E8AEB28A18349E2000E5FA7B /* StickyDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StickyDetailViewController.xib; sourceTree = "<group>"; };
+		E8AEB28C18349E5900E5FA7B /* StickyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickyDetailViewController.m; sourceTree = "<group>"; };
+		E8AEB28E18349E5F00E5FA7B /* StickyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickyDetailViewController.h; sourceTree = "<group>"; };
+		E8AEB28F18349F4400E5FA7B /* DrawerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerDetailViewController.h; sourceTree = "<group>"; };
+		E8AEB29018349F4E00E5FA7B /* DrawerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerDetailViewController.m; sourceTree = "<group>"; };
+		E8AEB29218349F5600E5FA7B /* DrawerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawerDetailViewController.xib; sourceTree = "<group>"; };
 		E8C61F4718284FC600DBA379 /* NormalDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalDetailViewController.xib; sourceTree = "<group>"; };
-		E8C61F491828506500DBA379 /* DrawerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerDetailViewController.h; sourceTree = "<group>"; };
-		E8C61F4A1828507400DBA379 /* DrawerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerDetailViewController.m; sourceTree = "<group>"; };
-		E8C61F4C1828508400DBA379 /* DrawerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawerDetailViewController.xib; sourceTree = "<group>"; };
 		E8D1B3BD181B179900D4A6BA /* SplitViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplitViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D1B3C0181B179900D4A6BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E8D1B3C2181B179900D4A6BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,7 +49,6 @@
 		E8D1B406181B236100D4A6BA /* NormalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalDetailViewController.m; sourceTree = "<group>"; };
 		E8D1B407181B236100D4A6BA /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		E8D1B408181B236100D4A6BA /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		E8E73A86181B5E7B00F8BC1D /* StickyDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StickyDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,14 +65,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E8942F6E181B60F500D8D423 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				E8942F6F181B60F500D8D423 /* SSSocialCircle.otf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		E8D1B3B4181B179900D4A6BA = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +128,6 @@
 		E8D1B3FF181B236100D4A6BA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E8942F6E181B60F500D8D423 /* Fonts */,
 				E8D1B400181B236100D4A6BA /* Images.xcassets */,
 			);
 			path = Resources;
@@ -153,12 +141,12 @@
 				E8D1B405181B236100D4A6BA /* NormalDetailViewController.h */,
 				E8D1B406181B236100D4A6BA /* NormalDetailViewController.m */,
 				E8C61F4718284FC600DBA379 /* NormalDetailViewController.xib */,
-				E8C61F4318284F8800DBA379 /* StickyDetailViewController.h */,
-				E8C61F4518284FA200DBA379 /* StickyDetailViewController.m */,
-				E8E73A86181B5E7B00F8BC1D /* StickyDetailViewController.xib */,
-				E8C61F491828506500DBA379 /* DrawerDetailViewController.h */,
-				E8C61F4A1828507400DBA379 /* DrawerDetailViewController.m */,
-				E8C61F4C1828508400DBA379 /* DrawerDetailViewController.xib */,
+				E8AEB28E18349E5F00E5FA7B /* StickyDetailViewController.h */,
+				E8AEB28C18349E5900E5FA7B /* StickyDetailViewController.m */,
+				E8AEB28A18349E2000E5FA7B /* StickyDetailViewController.xib */,
+				E8AEB28F18349F4400E5FA7B /* DrawerDetailViewController.h */,
+				E8AEB29018349F4E00E5FA7B /* DrawerDetailViewController.m */,
+				E8AEB29218349F5600E5FA7B /* DrawerDetailViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -215,13 +203,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8660D65182851EA0024870C /* StickyDetailViewController.xib in Resources */,
+				E8AEB28B18349E2000E5FA7B /* StickyDetailViewController.xib in Resources */,
 				E8C61F4818284FC600DBA379 /* NormalDetailViewController.xib in Resources */,
-				E8942F71181B60F500D8D423 /* SSSocialCircle.otf in Resources */,
+				E8AEB29318349F5600E5FA7B /* DrawerDetailViewController.xib in Resources */,
 				E8D1B3CB181B179900D4A6BA /* InfoPlist.strings in Resources */,
 				E8D1B409181B236100D4A6BA /* Images.xcassets in Resources */,
-				E8C61F4418284F8800DBA379 /* StickyDetailViewController.h in Resources */,
-				E8C61F4D1828508400DBA379 /* DrawerDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,10 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8AEB28D18349E5900E5FA7B /* StickyDetailViewController.m in Sources */,
 				E8D1B3D1181B179900D4A6BA /* AppDelegate.m in Sources */,
+				E8AEB29118349F4E00E5FA7B /* DrawerDetailViewController.m in Sources */,
 				E8D1B3FE181B1E5400D4A6BA /* BDBSplitViewController.m in Sources */,
-				E8660D66182852010024870C /* StickyDetailViewController.m in Sources */,
-				E8C61F4B1828507400DBA379 /* DrawerDetailViewController.m in Sources */,
 				E8D1B40C181B236100D4A6BA /* MasterViewController.m in Sources */,
 				E8D1B3CD181B179900D4A6BA /* main.m in Sources */,
 				E8D1B40B181B236100D4A6BA /* NormalDetailViewController.m in Sources */,

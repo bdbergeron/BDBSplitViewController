@@ -15,9 +15,6 @@
 @interface StickyDetailViewController : BDBDetailViewController
 <UISplitViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *labelContainerView;
-@property (weak, nonatomic) IBOutlet UILabel *websiteLabel;
-@property (weak, nonatomic) IBOutlet UILabel *twitterLabel;
-@property (weak, nonatomic) IBOutlet UILabel *githubLabel;
+@property (weak, nonatomic) IBOutlet UIView *twitter;
 
 @end

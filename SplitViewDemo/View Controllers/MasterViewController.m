@@ -65,32 +65,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.splitViewController hideMasterViewControllerAnimated:YES completion:^{
-        BDBDetailViewController *detailView;
-        switch (indexPath.row)
+    BDBDetailViewController *detailView;
+    switch (indexPath.row)
+    {
+        case 2:
         {
-            case 2:
-            {
-                detailView = [[NSClassFromString(@"DrawerDetailViewController") alloc] init];
-                break;
-            }
-            case 1:
-            {
-                detailView = [[NSClassFromString(@"StickyDetailViewController") alloc] init];
-                break;
-            }
-            case 0:
-            default:
-            {
-                detailView = [[NSClassFromString(@"NormalDetailViewController") alloc] init];
-                break;
-            }
+            detailView = [[NSClassFromString(@"DrawerDetailViewController") alloc] init];
+            break;
         }
+        case 1:
+        {
+            detailView = [[NSClassFromString(@"StickyDetailViewController") alloc] init];
+            break;
+        }
+        case 0:
+        default:
+        {
+            detailView = [[NSClassFromString(@"NormalDetailViewController") alloc] init];
+            break;
+        }
+    }
 
-        UIViewController *currentDetailView = [(UINavigationController *)self.splitViewController.detailViewController topViewController];
-        if (![currentDetailView isKindOfClass:[detailView class]])
+    UIViewController *currentDetailView = [(UINavigationController *)self.splitViewController.detailViewController topViewController];
+    if (![currentDetailView isKindOfClass:[detailView class]])
+    {
+        if (self.splitViewController.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer || indexPath.row == 2)
+            [self.splitViewController hideMasterViewControllerAnimated:YES completion:^{
+                [self.splitViewController setDetailViewController:detailView];
+            }];
+        else
             [self.splitViewController setDetailViewController:detailView];
-    }];
+    }
 }
 
 @end
