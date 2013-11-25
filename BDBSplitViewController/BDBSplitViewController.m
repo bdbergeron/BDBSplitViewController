@@ -81,6 +81,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
             }];
             self.viewControllers = mutableViewControllers;
         }
+        self.masterViewState = BDBMasterViewStateHidden;
+        self.masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
     }
     return self;
 }
@@ -267,7 +269,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark Master View
 - (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style
 {
-    [self setMasterViewDisplayStyle:style animated:YES];
+    [self setMasterViewDisplayStyle:style animated:NO];
 }
 
 - (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style animated:(BOOL)animated
@@ -280,6 +282,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         {
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
+            self.masterViewState = BDBMasterViewStateVisible;
             break;
         }
 
