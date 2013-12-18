@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 @property (nonatomic, assign) BOOL detailViewShouldDim;
 @property (nonatomic) CGFloat detailViewDimmingOpacity;
 
+@property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
 
 #pragma mark Initialization
 + (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
