@@ -145,13 +145,16 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([object isEqual:self.detailViewController] && [keyPath isEqualToString:@"view.frame"])
+    if (context == kBDBSplitViewKVOContext)
     {
-        UIView *view = self.detailViewController.view;
-        CGRect currentFrame = [change[@"new"] CGRectValue];
-        CGRect properFrame = [self detailViewFrameForState:self.masterViewState];
-        if (!CGRectEqualToRect(currentFrame, properFrame))
-            view.frame = [self detailViewFrameForState:self.masterViewState];
+        if ([object isEqual:self.detailViewController] && [keyPath isEqualToString:@"view.frame"])
+        {
+            UIView *view = self.detailViewController.view;
+            CGRect currentFrame = [change[@"new"] CGRectValue];
+            CGRect properFrame = [self detailViewFrameForState:self.masterViewState];
+            if (!CGRectEqualToRect(currentFrame, properFrame))
+                view.frame = [self detailViewFrameForState:self.masterViewState];
+        }
     }
     else
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
