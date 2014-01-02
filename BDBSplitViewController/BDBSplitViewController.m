@@ -99,6 +99,12 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     return self;
 }
 
+- (void)dealloc
+{
+    //Remove the observer to avoid KVO informations leakage error (NSKVODeallocateBreak)
+    [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
