@@ -454,6 +454,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                              [self.masterViewController viewDidAppear:animated];
                              [self.view setNeedsLayout];
 
+                             if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerDidShowMasterViewController:)])
+                                 [self.svcDelegate splitViewControllerDidShowMasterViewController:self];
+
                              if (completion)
                                  completion();
                          }];
@@ -464,6 +467,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
         [self.masterViewController viewDidAppear:animated];
         [self.view setNeedsLayout];
+
+        if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerDidShowMasterViewController:)])
+            [self.svcDelegate splitViewControllerDidShowMasterViewController:self];
 
         if (completion)
             completion();
@@ -503,6 +509,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                              [self.masterViewController viewDidDisappear:animated];
                              [self.view setNeedsLayout];
 
+                             if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerDidHideMasterViewController:)])
+                                 [self.svcDelegate splitViewControllerDidHideMasterViewController:self];
+
                              if (completion)
                                  completion();
                          }];
@@ -518,9 +527,30 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         [self.masterViewController viewDidDisappear:animated];
         [self.view setNeedsLayout];
 
+        if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerDidHideMasterViewController:)])
+            [self.svcDelegate splitViewControllerDidHideMasterViewController:self];
+
         if (completion)
             completion();
     }
+}
+
+@end
+
+
+#pragma mark -
+@implementation UIViewController (BDBSplitViewController)
+
+- (BDBSplitViewController *)splitViewController
+{
+    UIViewController *parentViewController = self;
+    while (parentViewController)
+    {
+        if ([parentViewController isKindOfClass:[BDBSplitViewController class]])
+            return (BDBSplitViewController *)parentViewController;
+        parentViewController = parentViewController.parentViewController;
+    }
+    return nil;
 }
 
 @end
