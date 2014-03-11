@@ -1,9 +1,24 @@
 //
 //  BDBSplitViewController.m
 //
-//  Created by Bradley Bergeron on 10/25/13.
-//  Copyright (c) 2013 Bradley Bergeron. All rights reserved.
+//  Copyright (c) 2013 Bradley David Bergeron
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy of
+//  this software and associated documentation files (the "Software"), to deal in
+//  the Software without restriction, including without limitation the rights to
+//  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+//  the Software, and to permit persons to whom the Software is furnished to do so,
+//  subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+//  FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+//  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+//  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+//  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -99,7 +114,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        [self setupWithViewControllers:super.viewControllers];
+        [self setupWithViewControllers:self.viewControllers];
     }
     return self;
 }
@@ -224,6 +239,11 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 - (void)configureMasterView
 {
+    if (self.masterViewState == BDBMasterViewStateHidden)
+        self.masterViewController.view.hidden = YES;
+    else
+        self.masterViewController.view.hidden = NO;
+
     if (self.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer)
     {
         self.masterViewController.view.clipsToBounds = NO;
@@ -282,12 +302,15 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     NSParameterAssert(viewControllers);
     NSAssert(viewControllers.count == 2, @"viewControllers array must conatin both a master view controller and a detail view controller.");
 
-    self.delegate = nil;
-    [self.detailViewController removeObserver:self
-                                   forKeyPath:@"view.frame"
-                                      context:kBDBSplitViewKVOContext];
+    if (![viewControllers isEqualToArray:self.viewControllers])
+    {
+        self.delegate = nil;
+        [self.detailViewController removeObserver:self
+                                       forKeyPath:@"view.frame"
+                                          context:kBDBSplitViewKVOContext];
 
-    [super setViewControllers:viewControllers];
+        [super setViewControllers:viewControllers];
+    }
 
     [self.detailViewController addObserver:self
                                 forKeyPath:@"view.frame"
