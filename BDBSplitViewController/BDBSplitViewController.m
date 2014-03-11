@@ -59,18 +59,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     return [[[self class] alloc] initWithMasterViewController:mvc detailViewController:dvc style:style];
 }
 
-- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc
-{
-    NSParameterAssert(mvc);
-    NSParameterAssert(dvc);
-
-    self = [super init];
-    if (self)
-    {
-        NSArray *viewControllers = @[mvc, dvc];
-        if ([mvc isKindOfClass:[UINavigationController class]] && [dvc isKindOfClass:[UINavigationController class]])
-            self.viewControllers = viewControllers;
-        else
+- (void)setup:(NSArray *)viewControllers {
+        if (![[viewControllers objectAtIndex:0] isKindOfClass:[UINavigationController class]] ||
+            ![[viewControllers objectAtIndex:1] isKindOfClass:[UINavigationController class]])
         {
             NSMutableArray *mutableViewControllers = [NSMutableArray array];
             [viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
@@ -83,6 +74,27 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         }
         self.masterViewState = BDBMasterViewStateHidden;
         self.masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self setup:self.viewControllers];
+    }
+    return self;
+}
+
+- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc
+{
+    NSParameterAssert(mvc);
+    NSParameterAssert(dvc);
+
+    self = [super init];
+    if (self)
+    {
+        NSArray *viewControllers = @[mvc, dvc];
+        [self setup:viewControllers];
     }
     return self;
 }
