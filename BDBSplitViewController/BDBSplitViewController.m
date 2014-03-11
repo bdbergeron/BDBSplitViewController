@@ -251,6 +251,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         self.masterViewController.view.layer.shadowOffset = (CGSize){0, 0};
         self.masterViewController.view.layer.shadowRadius = 10.0;
         self.masterViewController.view.layer.shadowOpacity = 0.8;
+        self.masterViewController.view.alpha = 0.0;
     }
     else
     {
