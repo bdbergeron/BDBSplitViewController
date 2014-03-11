@@ -33,6 +33,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 @property (nonatomic, assign, readwrite) BOOL masterViewIsHidden;
 
+- (void)setupWithViewControllers:(NSArray *)viewControllers;
+
 - (void)initialize;
 - (void)configureMasterView;
 
@@ -74,22 +76,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     self = [super init];
     if (self)
     {
-        NSArray *viewControllers = @[mvc, dvc];
-        if ([mvc isKindOfClass:[UINavigationController class]] && [dvc isKindOfClass:[UINavigationController class]])
-            self.viewControllers = viewControllers;
-        else
-        {
-            NSMutableArray *mutableViewControllers = [NSMutableArray array];
-            [viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
-                if (![vc isKindOfClass:[UINavigationController class]])
-                    [mutableViewControllers addObject:[[UINavigationController alloc] initWithRootViewController:vc]];
-                else
-                    [mutableViewControllers addObject:vc];
-            }];
-            self.viewControllers = mutableViewControllers;
-        }
-        self.masterViewState = BDBMasterViewStateHidden;
-        self.masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
+        [self setupWithViewControllers:@[mvc, dvc]];
     }
     return self;
 }
@@ -98,19 +85,50 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
               detailViewController:(UIViewController *)dvc
                              style:(BDBMasterViewDisplayStyle)style
 {
-    NSParameterAssert(style);
-
     self = [self initWithMasterViewController:mvc detailViewController:dvc];
     if (self)
     {
-        self.masterViewDisplayStyle = style;
+        [self setupWithViewControllers:@[mvc, dvc]];
+        _masterViewDisplayStyle = style;
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self setupWithViewControllers:super.viewControllers];
+    }
+    return self;
+}
+
+- (void)setupWithViewControllers:(NSArray *)viewControllers
+{
+    NSParameterAssert(viewControllers);
+    NSAssert(viewControllers.count == 2, @"viewControllers array must conatin both a master view controller and a detail view controller.");
+
+    NSMutableArray *mutableViewControllers = [NSMutableArray array];
+    [viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
+        if (![vc isKindOfClass:[UINavigationController class]])
+            [mutableViewControllers addObject:[[UINavigationController alloc] initWithRootViewController:vc]];
+        else
+            [mutableViewControllers addObject:vc];
+    }];
+    self.viewControllers = mutableViewControllers;
+
+    _masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
+
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+        _masterViewState = BDBMasterViewStateHidden;
+    else
+        _masterViewState = BDBMasterViewStateVisible;
+}
+
+#pragma mark View Lifecycle
 - (void)dealloc
 {
-    //Remove the observer to avoid KVO informations leakage error (NSKVODeallocateBreak)
     [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
 }
 
@@ -118,14 +136,18 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 {
     [super awakeFromNib];
     [self initialize];
-    [self configureMasterView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initialize];
-    [self configureMasterView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.0];
 }
 
 - (void)viewDidLayoutSubviews
@@ -151,6 +173,14 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         else
             [self hideMasterViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+
+    if (self.masterViewState == BDBMasterViewStateHidden)
+        self.masterViewController.view.hidden = YES;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -188,6 +218,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     [self.detailDimmingView addGestureRecognizer:self.detailTapGesture];
 
     self.masterViewAnimationDuration = 0.3;
+
+    [self configureMasterView];
 }
 
 - (void)configureMasterView
@@ -311,7 +343,6 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         {
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
-            self.masterViewState = BDBMasterViewStateVisible;
             break;
         }
 
@@ -319,7 +350,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         {
             self.detailViewShouldDim = YES;
             self.masterViewShouldDismissOnTap = YES;
-            [self hideMasterViewControllerAnimated:animated completion:nil];
+            self.masterViewState = BDBMasterViewStateHidden;
             break;
         }
 
@@ -352,17 +383,19 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     {
         case BDBMasterViewStateHidden:
         {
-            return (CGRect){{-masterViewFrame.size.width, 0}, masterViewFrame.size};
+            masterViewFrame = (CGRect){{-masterViewFrame.size.width, 0}, masterViewFrame.size};
             break;
         }
 
         case BDBMasterViewStateVisible:
         default:
         {
-            return (CGRect){CGPointZero, masterViewFrame.size};
+            masterViewFrame = (CGRect){CGPointZero, masterViewFrame.size};
             break;
         }
     }
+
+    return masterViewFrame;
 }
 
 #pragma mark Detail View
@@ -421,9 +454,6 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     if (!self.masterViewIsHidden)
         return;
 
-    self.masterViewState = BDBMasterViewStateVisible;
-    self.masterViewController.view.alpha = 1.0;
-
     if (self.detailViewShouldDim)
     {
         self.detailDimmingView.frame = self.view.bounds;
@@ -437,6 +467,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         [self.svcDelegate splitViewControllerWillShowMasterViewController:self];
 
     [self.masterViewController viewWillAppear:animated];
+
+    self.masterViewState = BDBMasterViewStateVisible;
+    self.masterViewController.view.hidden = NO;
 
     if (animated)
     {
@@ -482,12 +515,12 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     if (self.masterViewIsHidden)
         return;
 
-    self.masterViewState = BDBMasterViewStateHidden;
-
     if ([self.svcDelegate respondsToSelector:@selector(splitViewControllerWillHideMasterViewController:)])
         [self.svcDelegate splitViewControllerWillHideMasterViewController:self];
 
     [self.masterViewController viewWillDisappear:animated];
+
+    self.masterViewState = BDBMasterViewStateHidden;
 
     if (animated)
     {
@@ -500,7 +533,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateHidden];
                          }
                          completion:^(BOOL finished) {
-                             self.masterViewController.view.alpha = 0.0;
+                             self.masterViewController.view.hidden = YES;
+
                              self.detailDimmingView.hidden = YES;
                              self.detailTapGesture.enabled = NO;
 
@@ -518,7 +552,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     }
     else
     {
-        self.masterViewController.view.alpha = 0.0;
+        self.masterViewController.view.hidden = YES;
+
         self.detailDimmingView.hidden = YES;
         self.detailTapGesture.enabled = NO;
 
