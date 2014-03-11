@@ -244,6 +244,15 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 - (void)splitViewControllerWillShowMasterViewController:(BDBSplitViewController *)svc;
 
 /**
+ *  Delegate method called after the master view is shown.
+ *
+ *  @param svc The active split view controller instance calling the delegate method.
+ *
+ *  @since 1.2.2
+ */
+- (void)splitViewControllerDidShowMasterViewController:(BDBSplitViewController *)svc;
+
+/**
  *  Delegate method called before teh master view is hidden.
  *
  *  @param svc The active split view controller instance calling the delegate method.
@@ -251,6 +260,16 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
  *  @since 1.2.0
  */
 - (void)splitViewControllerWillHideMasterViewController:(BDBSplitViewController *)svc;
+
+/**
+ *  Delegate method called after the master view is hidden.
+ *
+ *  @param svc The active split view controller instance calling the delegate method.
+ *
+ *  @since 1.2.2
+ */
+- (void)splitViewControllerDidHideMasterViewController:(BDBSplitViewController *)svc;
+
 
 @end
 
