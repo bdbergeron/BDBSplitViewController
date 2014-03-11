@@ -60,9 +60,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 }
 
 - (void)setup:(NSArray *)viewControllers {
-        if ([[viewControllers objectAtIndex:0] isKindOfClass:[UINavigationController class]] && [[viewControllers objectAtIndex:1] isKindOfClass:[UINavigationController class]])
-            self.viewControllers = viewControllers;
-        else
+        if (![[viewControllers objectAtIndex:0] isKindOfClass:[UINavigationController class]] ||
+            ![[viewControllers objectAtIndex:1] isKindOfClass:[UINavigationController class]])
         {
             NSMutableArray *mutableViewControllers = [NSMutableArray array];
             [viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
