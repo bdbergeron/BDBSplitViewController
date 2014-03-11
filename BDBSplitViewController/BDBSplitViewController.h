@@ -10,10 +10,34 @@
 
 @protocol BDBSplitViewControllerDelegate;
 
+/**
+ *  Styles for the master view controller.
+ *
+ *  @since 1.1.0
+ */
 typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 {
+    /**
+     *  The default style. Doesn't do anything special compared to a regular UISplitViewController.
+     *
+     *  @since 1.1.0
+     */
     BDBMasterViewDisplayStyleNormal,
+
+    /**
+     *  Maintains the current state of the master view upon device rotation. When the split view is 
+     *  created, the master view is visible.
+     *
+     *  @since 1.1.0
+     */
     BDBMasterViewDisplayStyleSticky,
+
+    /**
+     *  Shows the master view in a drawer that slides in and out. The detail view encompasses the
+     *  full width of the screen.
+     *
+     *  @since 1.1.0
+     */
     BDBMasterViewDisplayStyleDrawer
 };
 
@@ -21,38 +45,186 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 #pragma mark -
 @interface BDBSplitViewController : UISplitViewController
 
+/**
+ *  BDBSplitViewController delegate.
+ *
+ *  @since 1.0.0
+ */
 @property (nonatomic) id <BDBSplitViewControllerDelegate> svcDelegate;
 
+/**
+ *  Quickly access the master view controller.
+ *
+ *  @since 1.0.0
+ */
 @property (nonatomic, strong, readonly) UIViewController *masterViewController;
+
+/**
+ *  Set and/or access the detail view controller.
+ *
+ *  @since 1.0.0
+ */
 @property (nonatomic, strong)           UIViewController *detailViewController;
 
+/**
+ *  A simple Show/Hide UIBarButtonItem that you can use to toggle the master view state.
+ *  Automatically changes the label based on the current state of the master view.
+ *
+ *  @since 1.0.0
+ */
 @property (nonatomic, strong, readonly) UIBarButtonItem *showHideMasterViewButtonItem;
+
+/**
+ *  A simple Close UIBarButtonItem that you can use to close the master view controller.
+ *
+ *  @since 1.0.0
+ */
 @property (nonatomic, strong, readonly) UIBarButtonItem *closeMasterViewButtonItem;
 
+/**
+ *  Quickly check whether or not the master view is hidden.
+ *
+ *  @since 1.0.0
+ */
 @property (nonatomic, assign, readonly)  BOOL masterViewIsHidden;
 
+/**
+ *  Set/get the master view display state.
+ *
+ *  @since 1.1.0
+ */
 @property (nonatomic) BDBMasterViewDisplayStyle masterViewDisplayStyle;
+
+/**
+ *  Whether or not the master view automatically hides when the detail view is tapped.
+ *  When masterViewDisplayState is set to Drawer, this value defaults to YES. Otherwise,
+ *  the default value is NO;
+ *
+ *  @since 1.1.0
+ */
 @property (nonatomic, assign) BOOL masterViewShouldDismissOnTap;
+
+/**
+ *  Set/get the duration of the master view show/hide animations. Default is 0.3 seconds.
+ *
+ *  @since 1.2.0
+ */
 @property (nonatomic) CGFloat masterViewAnimationDuration;
 
+/**
+ *  Whether or not the detail view should dim when the master view is shown. When
+ *  masterViewDisplayStyle is set to Drawer, this value defaults to YES. Otherwise,
+ *  the default value is NO.
+ *
+ *  @since 1.1.0
+ */
 @property (nonatomic, assign) BOOL detailViewShouldDim;
+
+/**
+ *  Set/get the opacity of the detail dimming view. Default is 0.4.
+ *
+ *  @since 1.1.0
+ */
 @property (nonatomic) CGFloat detailViewDimmingOpacity;
 
 @property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
 
 #pragma mark Initialization
-+ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
-+ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle) style;
+/**
+ *  Create and initialize a split view with the given master and detail view controllers.
+ *
+ *  @param mvc Master view controller.
+ *  @param dvc Detail view controller.
+ *
+ *  @return New BDBSplitViewController instance.
+ *
+ *  @since 1.2.0
+ */
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc
+                             detailViewController:(UIViewController *)dvc;
 
-- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc;
-- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style;
+/**
+ *  Create and initialize a split view with the given master and detail view controllers using the 
+ *  specified style.
+ *
+ *  @param mvc   Master view controller.
+ *  @param dvc   Detail view controller.
+ *  @param style Master view display style.
+ *
+ *  @return New BDBSplitViewController instance.
+ *
+ *  @since 1.2.0
+ */
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc
+                             detailViewController:(UIViewController *)dvc
+                                            style:(BDBMasterViewDisplayStyle) style;
+
+/**
+ *  Initialize a new split view controller instance with the given master and detail view 
+ *  controllers.
+ *
+ *  @param mvc Master view controller.
+ *  @param dvc Detail view controller.
+ *
+ *  @return Initialized BDBSplitViewController instance.
+ *
+ *  @since 1.0.0
+ */
+- (id)initWithMasterViewController:(UIViewController *)mvc
+              detailViewController:(UIViewController *)dvc;
+
+/**
+ *  Initialize a new split view controller instance with the given master and detail view 
+ *  controllers using the spcified style.
+ *
+ *  @param mvc   Master view controller.
+ *  @param dvc   Detail view controller.
+ *  @param style Master view display style.
+ *
+ *  @return Initialized BDBSplitViewController instance.
+ *
+ *  @since 1.2.0
+ */
+- (id)initWithMasterViewController:(UIViewController *)mvc
+              detailViewController:(UIViewController *)dvc
+                             style:(BDBMasterViewDisplayStyle)style;
+
 
 #pragma mark Show / Hide Master View
-- (void)showMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion;
-- (void)hideMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion;
+/**
+ *  Show the master view controller.
+ *
+ *  @param animated   Whether or not to animate showing.
+ *  @param completion Callback to be performed once the master view is visible.
+ *
+ *  @since 1.0.0
+ */
+- (void)showMasterViewControllerAnimated:(BOOL)animated
+                              completion:(void (^)(void))completion;
+
+/**
+ *  Hide the master view controller.
+ *
+ *  @param animated   Whether or not to animate hiding.
+ *  @param completion Callback to be performed once the master view has been hidden.
+ *
+ *  @since 1.0.0
+ */
+- (void)hideMasterViewControllerAnimated:(BOOL)animated
+                              completion:(void (^)(void))completion;
+
 
 #pragma mark Customization
-- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style animated:(BOOL)animated;
+/**
+ *  Set the master view display style.
+ *
+ *  @param style    New display style for the master view.
+ *  @param animated Whether or not to animate the transition to the new display style.
+ *
+ *  @since 1.2.1
+ */
+- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style
+                         animated:(BOOL)animated;
 
 @end
 
@@ -62,7 +234,22 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 
 @optional
 
+/**
+ *  Delegate method called before the master view is shown.
+ *
+ *  @param svc The active split view controller instance calling the delegate method.
+ *
+ *  @since 1.2.0
+ */
 - (void)splitViewControllerWillShowMasterViewController:(BDBSplitViewController *)svc;
+
+/**
+ *  Delegate method called before teh master view is hidden.
+ *
+ *  @param svc The active split view controller instance calling the delegate method.
+ *
+ *  @since 1.2.0
+ */
 - (void)splitViewControllerWillHideMasterViewController:(BDBSplitViewController *)svc;
 
 @end
@@ -71,7 +258,12 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 #pragma mark -
 @interface UIViewController (BDBSplitViewController)
 
-@property (nonatomic, readonly, retain) BDBSplitViewController *splitViewController;
+/**
+ *  Quickly access the owning split view controller of the current view controller.
+ *
+ *  @since 1.0.0
+ */
+@property (nonatomic, readonly) BDBSplitViewController *splitViewController;
 
 @end
 
@@ -80,6 +272,22 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 @interface BDBDetailViewController : UIViewController
 <UISplitViewControllerDelegate>
 
-- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation;
+/**
+ *  UISplitViewDelegate method that is needed in order to properly maintain the master
+ *  view state when the device is rotated. If you do not use the BDBDetailViewController
+ *  subclass as the parent class of your detail view controller, the split view will not
+ *  operate properly.
+ *
+ *  @param svc         The active split view controller calling the delegate method.
+ *  @param vc          View controller to hide.
+ *  @param orientation The orientation that the device is being rotated to.
+ *
+ *  @return Whether or not to hide the view controller in the new device orientation.
+ *
+ *  @since 1.0.0
+ */
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation;
 
 @end
