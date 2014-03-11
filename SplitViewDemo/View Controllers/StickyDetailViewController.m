@@ -18,7 +18,7 @@
 
     self.title = @"Sticky";
 
-    self.splitViewController.masterViewDisplayStyle = BDBMasterViewDisplayStyleSticky;
+    [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleSticky animated:YES];
     self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)

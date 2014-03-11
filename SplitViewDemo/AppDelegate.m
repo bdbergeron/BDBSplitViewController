@@ -20,12 +20,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
-    BDBSplitViewController *splitViewController = [[BDBSplitViewController alloc] initWithMasterViewController:[MasterViewController new]
-                                                                                          detailViewController:[[NormalDetailViewController alloc] initWithNibName:nil bundle:nil]];
+    BDBSplitViewController *splitVC = [BDBSplitViewController splitViewWithMasterViewController:[MasterViewController new]
+                                                                           detailViewController:[NormalDetailViewController new]];
 
-    self.window.rootViewController = splitViewController;
+    self.window.rootViewController = splitVC;
     [self.window makeKeyAndVisible];
     return YES;
 }
 
 @end
+

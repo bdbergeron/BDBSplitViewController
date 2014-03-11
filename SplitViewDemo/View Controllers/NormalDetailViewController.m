@@ -18,7 +18,7 @@
 
     self.title = @"Normal";
 
-    self.splitViewController.masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
+    [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleNormal animated:YES];
     self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
