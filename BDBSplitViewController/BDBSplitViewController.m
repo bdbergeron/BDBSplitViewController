@@ -49,17 +49,24 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 @implementation BDBSplitViewController
 
 #pragma mark Initialization
-+ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc
+                             detailViewController:(UIViewController *)dvc
 {
-    return [[[self class] alloc] initWithMasterViewController:mvc detailViewController:dvc];
+    return [[[self class] alloc] initWithMasterViewController:mvc
+                                         detailViewController:dvc];
 }
 
-+ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style
++ (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc
+                             detailViewController:(UIViewController *)dvc
+                                            style:(BDBMasterViewDisplayStyle)style
 {
-    return [[[self class] alloc] initWithMasterViewController:mvc detailViewController:dvc style:style];
+    return [[[self class] alloc] initWithMasterViewController:mvc
+                                         detailViewController:dvc
+                                                        style:style];
 }
 
-- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc
+- (id)initWithMasterViewController:(UIViewController *)mvc
+              detailViewController:(UIViewController *)dvc
 {
     NSParameterAssert(mvc);
     NSParameterAssert(dvc);
@@ -87,7 +94,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     return self;
 }
 
-- (id)initWithMasterViewController:(UIViewController *)mvc detailViewController:(UIViewController *)dvc style:(BDBMasterViewDisplayStyle)style
+- (id)initWithMasterViewController:(UIViewController *)mvc
+              detailViewController:(UIViewController *)dvc
+                             style:(BDBMasterViewDisplayStyle)style
 {
     NSParameterAssert(style);
 
@@ -127,7 +136,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     self.detailViewController.view.frame = [self detailViewFrameForState:self.masterViewState];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 
@@ -143,7 +153,10 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
     if (context == kBDBSplitViewKVOContext)
     {
@@ -234,14 +247,20 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark UIViewController Overrides
 - (void)setViewControllers:(NSArray *)viewControllers
 {
-    NSAssert(viewControllers && viewControllers.count == 2, @"viewControllers must contain a master and a detail view controller.");
+    NSParameterAssert(viewControllers);
+    NSAssert(viewControllers.count == 2, @"viewControllers array must conatin both a master view controller and a detail view controller.");
 
     self.delegate = nil;
-    [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
+    [self.detailViewController removeObserver:self
+                                   forKeyPath:@"view.frame"
+                                      context:kBDBSplitViewKVOContext];
 
     [super setViewControllers:viewControllers];
 
-    [self.detailViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:kBDBSplitViewKVOContext];
+    [self.detailViewController addObserver:self
+                                forKeyPath:@"view.frame"
+                                   options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                                   context:kBDBSplitViewKVOContext];
 
     UIViewController *dvc = [(UINavigationController *)viewControllers[1] topViewController];
     if ([dvc isKindOfClass:[BDBDetailViewController class]])
@@ -281,7 +300,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     [self setMasterViewDisplayStyle:style animated:NO];
 }
 
-- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style animated:(BOOL)animated
+- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style
+                         animated:(BOOL)animated
 {
     _masterViewDisplayStyle = style;
 
@@ -395,7 +415,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 }
 
 #pragma mark Show / Hide Master View
-- (void)showMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
+- (void)showMasterViewControllerAnimated:(BOOL)animated
+                              completion:(void (^)(void))completion
 {
     if (!self.masterViewIsHidden)
         return;
@@ -449,7 +470,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     }
 }
 
-- (void)hideMasterViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
+- (void)hideMasterViewControllerAnimated:(BOOL)animated
+                              completion:(void (^)(void))completion
 {
     if (self.masterViewIsHidden)
         return;
@@ -507,7 +529,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark -
 @implementation BDBDetailViewController
 
-- (BOOL)splitViewController:(BDBSplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation
+- (BOOL)splitViewController:(BDBSplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
 {
     switch (svc.masterViewDisplayStyle)
     {

@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
  *
  *  @since 1.0.0
  */
-@property (nonatomic, strong)           UIViewController *detailViewController;
+@property (nonatomic, strong) UIViewController *detailViewController;
 
 /**
  *  A simple Show/Hide UIBarButtonItem that you can use to toggle the master view state.
@@ -86,7 +86,7 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
  *
  *  @since 1.0.0
  */
-@property (nonatomic, assign, readonly)  BOOL masterViewIsHidden;
+@property (nonatomic, assign, readonly) BOOL masterViewIsHidden;
 
 /**
  *  Set/get the master view display state.
