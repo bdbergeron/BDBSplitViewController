@@ -503,6 +503,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                              self.detailDimmingView.alpha = 1.0;
                              self.masterViewController.view.frame = [self masterViewFrameForState:BDBMasterViewStateVisible];
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateVisible];
+                             [self.detailViewController.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
                              self.showHideMasterViewButtonItem.title = @"Hide";
@@ -554,6 +555,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                              self.detailDimmingView.alpha = 0.0;
                              self.masterViewController.view.frame = [self masterViewFrameForState:BDBMasterViewStateHidden];
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateHidden];
+                             [self.detailViewController.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
                              self.masterViewController.view.hidden = YES;
