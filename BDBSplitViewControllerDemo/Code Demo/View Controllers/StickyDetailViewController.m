@@ -35,16 +35,18 @@
     [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleSticky animated:YES];
     self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 
     [self.twitter addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
 }
 
 - (void)infoItemTapped:(UITapGestureRecognizer *)recognizer
 {
-    if (recognizer.state == UIGestureRecognizerStateEnded)
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/bradbergeron"]];
+    }
 }
 
 @end

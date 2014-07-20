@@ -34,7 +34,7 @@
 
     self.navigationItem.leftBarButtonItem = self.splitViewController.closeMasterViewButtonItem;
 
-    self.tableView.rowHeight = 90.0;
+    self.tableView.rowHeight = 90.0f;
 }
 
 #pragma mark UITableView Delegate
@@ -52,22 +52,21 @@
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
 
-    switch (indexPath.row)
-    {
-        case 2:
-        {
+    switch (indexPath.row) {
+        case 2: {
             cell.textLabel.text = @"Drawer Style";
+
             break;
         }
-        case 1:
-        {
+        case 1: {
             cell.textLabel.text = @"Sticky Style";
+
             break;
         }
         case 0:
-        default:
-        {
+        default: {
             cell.textLabel.text = @"Normal Style";
+
             break;
         }
     }
@@ -78,35 +77,36 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BDBDetailViewController *detailView;
-    switch (indexPath.row)
-    {
-        case 2:
-        {
+
+    switch (indexPath.row) {
+        case 2: {
             detailView = [NSClassFromString(@"DrawerDetailViewController") new];
+
             break;
         }
-        case 1:
-        {
+        case 1: {
             detailView = [NSClassFromString(@"StickyDetailViewController") new];
+
             break;
         }
         case 0:
-        default:
-        {
+        default: {
             detailView = [NSClassFromString(@"NormalDetailViewController") new];
+
             break;
         }
     }
 
     UIViewController *currentDetailView = [(UINavigationController *)self.splitViewController.detailViewController topViewController];
-    if (![currentDetailView isKindOfClass:[detailView class]])
-    {
-        if (self.splitViewController.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer || indexPath.row == 2)
+
+    if (![currentDetailView isKindOfClass:[detailView class]]) {
+        if (self.splitViewController.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer || indexPath.row == 2) {
             [self.splitViewController hideMasterViewControllerAnimated:YES completion:^{
                 [self.splitViewController setDetailViewController:detailView];
             }];
-        else
+        } else {
             [self.splitViewController setDetailViewController:detailView];
+        }
     }
 }
 

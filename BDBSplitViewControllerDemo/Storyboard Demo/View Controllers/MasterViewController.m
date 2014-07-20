@@ -54,10 +54,12 @@
 
 - (void)insertNewObject:(id)sender
 {
-    if (!self.objects)
+    if (!self.objects) {
         self.objects = [NSMutableArray array];
+    }
 
     [self.objects insertObject:[NSDate date] atIndex:0];
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -79,6 +81,7 @@
 
     NSDate *object = self.objects[indexPath.row];
     cell.textLabel.text = [object description];
+
     return cell;
 }
 
@@ -89,8 +92,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.objects removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }

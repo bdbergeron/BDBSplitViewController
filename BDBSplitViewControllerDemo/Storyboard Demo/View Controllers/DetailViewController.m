@@ -44,19 +44,24 @@
     [self configureView];
 }
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setDetailItem:(NSDate *)detailItem
 {
-    if (self.detailItem != newDetailItem)
-    {
-        self.detailItem = newDetailItem;
-        [self configureView];
+    if ([self.detailItem isEqualToDate:detailItem]) {
+        return;
     }
+
+    _detailItem = detailItem;
+
+    [self configureView];
 }
 
 - (void)configureView
 {
-    if (self.detailItem)
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    if (!self.detailItem) {
+        return;
+    }
+
+    self.detailDescriptionLabel.text = [self.detailItem description];
 }
 
 @end

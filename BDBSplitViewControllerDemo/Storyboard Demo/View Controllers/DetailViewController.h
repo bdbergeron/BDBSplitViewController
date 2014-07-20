@@ -31,6 +31,6 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *detailDescriptionLabel;
 
-@property (nonatomic) id detailItem;
+@property (nonatomic) NSDate *detailItem;
 
 @end

@@ -35,16 +35,18 @@
     [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleDrawer animated:YES];
     self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 
     [self.github addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
 }
 
 - (void)infoItemTapped:(UITapGestureRecognizer *)recognizer
 {
-    if (recognizer.state == UIGestureRecognizerStateEnded)
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://github.com/bdbergeron"]];
+    }
 }
 
 @end
