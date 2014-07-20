@@ -30,8 +30,7 @@
  *
  *  @since 1.1.0
  */
-typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
-{
+typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle) {
     /**
      *  The default style. Doesn't do anything special compared to a regular UISplitViewController.
      *
@@ -303,8 +302,7 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle)
 
 
 #pragma mark -
-@interface BDBDetailViewController : UIViewController
-<UISplitViewControllerDelegate>
+@interface BDBDetailViewController : UIViewController <UISplitViewControllerDelegate>
 
 /**
  *  UISplitViewDelegate method that is needed in order to properly maintain the master
