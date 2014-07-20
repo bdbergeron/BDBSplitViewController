@@ -64,21 +64,21 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle) {
  *
  *  @since 1.0.0
  */
-@property (nonatomic) id <BDBSplitViewControllerDelegate> svcDelegate;
+@property (nonatomic, weak) id <BDBSplitViewControllerDelegate> svcDelegate;
 
 /**
  *  Quickly access the master view controller.
  *
  *  @since 1.0.0
  */
-@property (nonatomic, strong, readonly) UIViewController *masterViewController;
+@property (nonatomic, readonly) UIViewController *masterViewController;
 
 /**
  *  Set and/or access the detail view controller.
  *
  *  @since 1.0.0
  */
-@property (nonatomic, strong) UIViewController *detailViewController;
+@property (nonatomic) UIViewController *detailViewController;
 
 /**
  *  A simple Show/Hide UIBarButtonItem that you can use to toggle the master view state.
@@ -86,14 +86,14 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle) {
  *
  *  @since 1.0.0
  */
-@property (nonatomic, strong, readonly) UIBarButtonItem *showHideMasterViewButtonItem;
+@property (nonatomic, readonly) UIBarButtonItem *showHideMasterViewButtonItem;
 
 /**
  *  A simple Close UIBarButtonItem that you can use to close the master view controller.
  *
  *  @since 1.0.0
  */
-@property (nonatomic, strong, readonly) UIBarButtonItem *closeMasterViewButtonItem;
+@property (nonatomic, readonly) UIBarButtonItem *closeMasterViewButtonItem;
 
 /**
  *  Quickly check whether or not the master view is hidden.
@@ -184,8 +184,8 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle) {
  *
  *  @since 1.0.0
  */
-- (id)initWithMasterViewController:(UIViewController *)mvc
-              detailViewController:(UIViewController *)dvc;
+- (instancetype)initWithMasterViewController:(UIViewController *)mvc
+                        detailViewController:(UIViewController *)dvc;
 
 /**
  *  Initialize a new split view controller instance with the given master and detail view 
@@ -199,9 +199,9 @@ typedef NS_ENUM(NSInteger, BDBMasterViewDisplayStyle) {
  *
  *  @since 1.2.0
  */
-- (id)initWithMasterViewController:(UIViewController *)mvc
-              detailViewController:(UIViewController *)dvc
-                             style:(BDBMasterViewDisplayStyle)style;
+- (instancetype)initWithMasterViewController:(UIViewController *)mvc
+                        detailViewController:(UIViewController *)dvc
+                                       style:(BDBMasterViewDisplayStyle)style;
 
 
 #pragma mark Show / Hide Master View

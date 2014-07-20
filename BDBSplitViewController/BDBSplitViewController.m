@@ -37,15 +37,13 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark -
 @interface BDBSplitViewController ()
 
-@property (nonatomic, strong) UIView *detailDimmingView;
-@property (nonatomic, strong) UITapGestureRecognizer *detailTapGesture;
+@property (nonatomic) UIView *detailDimmingView;
+@property (nonatomic) UITapGestureRecognizer *detailTapGesture;
 
-@property (nonatomic, strong, readwrite) UIBarButtonItem *showHideMasterViewButtonItem;
-@property (nonatomic, strong, readwrite) UIBarButtonItem *closeMasterViewButtonItem;
+@property (nonatomic, readwrite) UIBarButtonItem *showHideMasterViewButtonItem;
+@property (nonatomic, readwrite) UIBarButtonItem *closeMasterViewButtonItem;
 
 @property (nonatomic, readwrite) BDBMasterViewState masterViewState;
-
-@property (nonatomic, assign, readwrite) BOOL masterViewIsHidden;
 
 - (void)setupWithViewControllers:(NSArray *)viewControllers;
 
@@ -81,8 +79,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                                                         style:style];
 }
 
-- (id)initWithMasterViewController:(UIViewController *)mvc
-              detailViewController:(UIViewController *)dvc
+- (instancetype)initWithMasterViewController:(UIViewController *)mvc
+                        detailViewController:(UIViewController *)dvc
 {
     NSParameterAssert(mvc);
     NSParameterAssert(dvc);
@@ -96,9 +94,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     return self;
 }
 
-- (id)initWithMasterViewController:(UIViewController *)mvc
-              detailViewController:(UIViewController *)dvc
-                             style:(BDBMasterViewDisplayStyle)style
+- (instancetype)initWithMasterViewController:(UIViewController *)mvc
+                        detailViewController:(UIViewController *)dvc
+                                       style:(BDBMasterViewDisplayStyle)style
 {
     self = [self initWithMasterViewController:mvc detailViewController:dvc];
 
