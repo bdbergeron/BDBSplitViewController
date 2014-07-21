@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name      = 'BDBSplitViewController'
-  s.version   = '1.3.0'
+  s.version   = '1.3.1'
   s.license   = 'MIT'
   s.summary   = 'A nice drop-in replacement for UISplitViewController with a few fancy features.'
   s.homepage  = 'https://github.com/bdbergeron/BDBSplitViewController'
