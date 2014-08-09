@@ -1,7 +1,7 @@
 //
 //  BDBSplitViewController.h
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -28,13 +28,13 @@
 /**
  *  Styles for the master view controller.
  *
- *  @since 1.4.0
+ *  @since 1.4
  */
 typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
     /**
      *  The default style. Doesn't do anything special compared to a regular UISplitViewController.
      *
-     *  @since 1.4.0
+     *  @since 1.4
      */
     BDBSplitViewControllerMasterDisplayStyleNormal,
 
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
      *  Maintains the current state of the master view upon device rotation. When the split view is 
      *  created, the master view is visible.
      *
-     *  @since 1.4.0
+     *  @since 1.4
      */
     BDBSplitViewControllerMasterDisplayStyleSticky,
 
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
      *  Shows the master view in a drawer that slides in and out. The detail view encompasses the
      *  full width of the screen.
      *
-     *  @since 1.4.0
+     *  @since 1.4
      */
     BDBSplitViewControllerMasterDisplayStyleDrawer
 };
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
 /**
  *  Set/get the master view display state.
  *
- *  @since 1.4.0
+ *  @since 1.4
  */
 @property (nonatomic) BDBSplitViewControllerMasterDisplayStyle masterViewDisplayStyle;
 
@@ -167,7 +167,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
  *
  *  @return New BDBSplitViewController instance.
  *
- *  @since 1.4.0
+ *  @since 1.4
  */
 + (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc
                              detailViewController:(UIViewController *)dvc
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
  *
  *  @return Initialized BDBSplitViewController instance.
  *
- *  @since 1.4.0
+ *  @since 1.4
  */
 - (instancetype)initWithMasterViewController:(UIViewController *)mvc
                         detailViewController:(UIViewController *)dvc
@@ -235,7 +235,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
  *  @param style    New display style for the master view.
  *  @param animated Whether or not to animate the transition to the new display style.
  *
- *  @since 1.4.0
+ *  @since 1.4
  */
 - (void)setMasterViewDisplayStyle:(BDBSplitViewControllerMasterDisplayStyle)style
                          animated:(BOOL)animated;
