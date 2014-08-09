@@ -72,7 +72,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 + (instancetype)splitViewWithMasterViewController:(UIViewController *)mvc
                              detailViewController:(UIViewController *)dvc
-                                            style:(BDBMasterViewDisplayStyle)style
+                                            style:(BDBSplitViewControllerMasterDisplayStyle)style
 {
     return [[[self class] alloc] initWithMasterViewController:mvc
                                          detailViewController:dvc
@@ -96,7 +96,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 - (instancetype)initWithMasterViewController:(UIViewController *)mvc
                         detailViewController:(UIViewController *)dvc
-                                       style:(BDBMasterViewDisplayStyle)style
+                                       style:(BDBSplitViewControllerMasterDisplayStyle)style
 {
     self = [self initWithMasterViewController:mvc detailViewController:dvc];
 
@@ -136,7 +136,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
     self.viewControllers = mutableViewControllers;
 
-    _masterViewDisplayStyle = BDBMasterViewDisplayStyleNormal;
+    _masterViewDisplayStyle = BDBSplitViewControllerMasterDisplayStyleNormal;
 
     if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
         _masterViewState = BDBMasterViewStateHidden;
@@ -185,7 +185,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 
-    if (self.masterViewDisplayStyle == BDBMasterViewDisplayStyleNormal) {
+    if (self.masterViewDisplayStyle == BDBSplitViewControllerMasterDisplayStyleNormal) {
         if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
             if (self.masterViewIsHidden) {
                 [self showMasterViewControllerAnimated:YES completion:nil];
@@ -253,7 +253,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
         self.masterViewController.view.hidden = NO;
     }
 
-    if (self.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer) {
+    if (self.masterViewDisplayStyle == BDBSplitViewControllerMasterDisplayStyleDrawer) {
         self.masterViewController.view.clipsToBounds = NO;
         self.masterViewController.view.layer.shadowColor = [UIColor blackColor].CGColor;
         self.masterViewController.view.layer.shadowOffset = (CGSize){0, 0};
@@ -362,31 +362,31 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 }
 
 #pragma mark Master View
-- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style
+- (void)setMasterViewDisplayStyle:(BDBSplitViewControllerMasterDisplayStyle)style
 {
     [self setMasterViewDisplayStyle:style animated:NO];
 }
 
-- (void)setMasterViewDisplayStyle:(BDBMasterViewDisplayStyle)style
+- (void)setMasterViewDisplayStyle:(BDBSplitViewControllerMasterDisplayStyle)style
                          animated:(BOOL)animated
 {
     _masterViewDisplayStyle = style;
 
     switch (style) {
-        case BDBMasterViewDisplayStyleSticky: {
+        case BDBSplitViewControllerMasterDisplayStyleSticky: {
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
 
             break;
         }
-        case BDBMasterViewDisplayStyleDrawer: {
+        case BDBSplitViewControllerMasterDisplayStyleDrawer: {
             self.detailViewShouldDim = YES;
             self.masterViewShouldDismissOnTap = YES;
             self.masterViewState = BDBMasterViewStateHidden;
 
             break;
         }
-        case BDBMasterViewDisplayStyleNormal:
+        case BDBSplitViewControllerMasterDisplayStyleNormal:
         default: {
             self.detailViewShouldDim = NO;
             self.masterViewShouldDismissOnTap = NO;
@@ -455,7 +455,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 
 - (CGRect)detailViewFrameForState:(BDBMasterViewState)state
 {
-    if (self.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer) {
+    if (self.masterViewDisplayStyle == BDBSplitViewControllerMasterDisplayStyleDrawer) {
         return self.view.bounds;
     }
 
@@ -633,13 +633,13 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
               inOrientation:(UIInterfaceOrientation)orientation
 {
     switch (svc.masterViewDisplayStyle) {
-        case BDBMasterViewDisplayStyleSticky: {
+        case BDBSplitViewControllerMasterDisplayStyleSticky: {
             return NO;
         }
-        case BDBMasterViewDisplayStyleDrawer: {
+        case BDBSplitViewControllerMasterDisplayStyleDrawer: {
             return svc.masterViewIsHidden;
         }
-        case BDBMasterViewDisplayStyleNormal:
+        case BDBSplitViewControllerMasterDisplayStyleNormal:
         default: {
             if (svc.masterViewIsHidden) {
                 return UIInterfaceOrientationIsPortrait(orientation);
