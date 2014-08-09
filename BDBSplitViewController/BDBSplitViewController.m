@@ -265,7 +265,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 - (UIBarButtonItem *)showHideMasterViewButtonItem
 {
     if (!_showHideMasterViewButtonItem) {
-        _showHideMasterViewButtonItem = [[UIBarButtonItem alloc] initWithTitle:(self.masterViewIsHidden) ? @"Show" : @"Hide"
+        NSString *buttonTitle = (self.masterViewIsHidden) ?
+            NSLocalizedStringFromTable(@"Show", @"BDBSplitViewController", nil) :
+            NSLocalizedStringFromTable(@"Hide", @"BDBSplitViewController", nil);
+
+        _showHideMasterViewButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonTitle
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(toggleMasterView:)];
@@ -277,10 +281,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 - (UIBarButtonItem *)closeMasterViewButtonItem
 {
     if (!_closeMasterViewButtonItem) {
-        _closeMasterViewButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close"
-                                                                      style:UIBarButtonItemStyleBordered
-                                                                     target:self
-                                                                     action:@selector(closeMasterView:)];
+        _closeMasterViewButtonItem =
+            [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"Close", @"BDBSplitViewController", nil)
+                                             style:UIBarButtonItemStyleBordered
+                                            target:self
+                                            action:@selector(closeMasterView:)];
     }
 
     return _closeMasterViewButtonItem;
@@ -520,7 +525,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 - (void)didShowMasterViewController:(BOOL)animated
                          completion:(void (^)(void))completion
 {
-    self.showHideMasterViewButtonItem.title = @"Hide";
+    self.showHideMasterViewButtonItem.title = NSLocalizedStringFromTable(@"Hide", @"BDBSplitViewController", nil);
 
     [self.masterViewController viewDidAppear:animated];
     [self.view setNeedsLayout];
@@ -577,7 +582,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     self.detailDimmingView.hidden = YES;
     self.detailTapGesture.enabled = NO;
 
-    self.showHideMasterViewButtonItem.title = @"Show";
+    self.showHideMasterViewButtonItem.title = NSLocalizedStringFromTable(@"Show", @"BDBSplitViewController", nil);
 
     [self.masterViewController viewDidDisappear:animated];
     [self.view setNeedsLayout];

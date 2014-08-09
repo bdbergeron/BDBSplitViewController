@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
   
   s.source_files        = 'BDBSplitViewController/*.{h,m}'  
   s.public_header_files = 'BDBSplitViewController/*.h'
+  s.resources = 'BDBSplitViewController/Resources/*'
 end
