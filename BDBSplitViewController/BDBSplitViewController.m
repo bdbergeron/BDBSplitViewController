@@ -125,16 +125,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     NSParameterAssert(viewControllers);
     NSAssert(viewControllers.count == 2, @"viewControllers array must conatin both a master view controller and a detail view controller.");
 
-    NSMutableArray *mutableViewControllers = [NSMutableArray array];
-    [viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
-        if (![vc isKindOfClass:[UINavigationController class]]) {
-            [mutableViewControllers addObject:[[UINavigationController alloc] initWithRootViewController:vc]];
-        } else {
-            [mutableViewControllers addObject:vc];
-        }
-    }];
-
-    self.viewControllers = mutableViewControllers;
+    self.viewControllers = viewControllers;
 
     _masterViewDisplayStyle = BDBSplitViewControllerMasterDisplayStyleNormal;
 
@@ -328,7 +319,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                                    context:kBDBSplitViewKVOContext];
 
-    UIViewController *dvc = [(UINavigationController *)viewControllers[1] topViewController];
+    UIViewController *dvc = viewControllers[1];
 
     if ([dvc isKindOfClass:[BDBDetailViewController class]]) {
         self.delegate = (BDBDetailViewController *)dvc;
@@ -354,11 +345,7 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 {
     NSParameterAssert(dvc);
 
-    if ([dvc isKindOfClass:[UINavigationController class]]) {
-        self.viewControllers = @[self.masterViewController, dvc];
-    } else {
-        self.viewControllers = @[self.masterViewController, [[UINavigationController alloc] initWithRootViewController:dvc]];
-    }
+    self.viewControllers = @[self.masterViewController, dvc];
 }
 
 #pragma mark Master View
