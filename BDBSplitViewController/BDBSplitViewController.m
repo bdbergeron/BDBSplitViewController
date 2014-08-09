@@ -163,7 +163,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 {
     [super viewWillAppear:animated];
 
-    [self willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.0];
+    [self willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.f];
 }
 
 - (void)viewDidLayoutSubviews
@@ -224,8 +224,8 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 {
     self.detailDimmingView = [[UIView alloc] initWithFrame:self.view.frame];
     self.detailDimmingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.detailDimmingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:self.detailDimmingOpacity];
-    self.detailDimmingView.alpha = 0.0;
+    self.detailDimmingView.backgroundColor = [UIColor colorWithWhite:0.f alpha:self.detailDimmingOpacity];
+    self.detailDimmingView.alpha = 0.f;
     self.detailDimmingView.hidden = YES;
     [self.view insertSubview:self.detailDimmingView aboveSubview:self.detailViewController.view];
 
@@ -234,7 +234,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     self.detailTapGesture.numberOfTouchesRequired = 1;
     [self.detailDimmingView addGestureRecognizer:self.detailTapGesture];
 
-    self.masterViewAnimationDuration = 0.3;
+    self.masterViewAnimationDuration = 0.3f;
 
     [self configureMasterView];
 }
@@ -250,14 +250,14 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     if (self.masterViewDisplayStyle == BDBSplitViewControllerMasterDisplayStyleDrawer) {
         self.masterViewController.view.clipsToBounds = NO;
         self.masterViewController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.masterViewController.view.layer.shadowOffset = (CGSize){0, 0};
-        self.masterViewController.view.layer.shadowRadius = 10.0;
-        self.masterViewController.view.layer.shadowOpacity = 0.8;
+        self.masterViewController.view.layer.shadowOffset = (CGSize){0.f, 0.f};
+        self.masterViewController.view.layer.shadowRadius = 10.f;
+        self.masterViewController.view.layer.shadowOpacity = 0.8f;
     } else {
         self.masterViewController.view.clipsToBounds = YES;
         self.masterViewController.view.layer.shadowColor = nil;
-        self.masterViewController.view.layer.shadowRadius = 0.0;
-        self.masterViewController.view.layer.shadowOpacity = 0.0;
+        self.masterViewController.view.layer.shadowRadius = 0.f;
+        self.masterViewController.view.layer.shadowOpacity = 0.f;
     }
 }
 
@@ -405,7 +405,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 
     switch (state) {
         case BDBMasterViewStateHidden: {
-            masterViewFrame = (CGRect){{-masterViewFrame.size.width, 0}, masterViewFrame.size};
+            masterViewFrame = (CGRect){{-masterViewFrame.size.width, 0.f}, masterViewFrame.size};
 
             break;
         }
@@ -424,7 +424,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 - (CGFloat)detailDimmingOpacity
 {
     if (!_detailViewDimmingOpacity) {
-        _detailViewDimmingOpacity = 0.4;
+        _detailViewDimmingOpacity = 0.4f;
     }
 
     return _detailViewDimmingOpacity;
@@ -432,10 +432,10 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 
 - (void)setDetailDimmingOpacity:(CGFloat)opacity
 {
-    NSAssert(opacity >= 0.0 && opacity <= 1.0, @"Opacity must be between 0 and 1.");
+    NSAssert(opacity >= 0.f && opacity <= 1.f, @"Opacity must be between 0 and 1.");
 
     _detailViewDimmingOpacity = opacity;
-    self.detailDimmingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:opacity];
+    self.detailDimmingView.backgroundColor = [UIColor colorWithWhite:0.f alpha:opacity];
 }
 
 - (void)detailViewTapped:(UITapGestureRecognizer *)recognizer
@@ -462,7 +462,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
         }
         case BDBMasterViewStateVisible:
         default: {
-            frame = (CGRect){{masterViewFrame.size.width + 1, 0}, {self.view.bounds.size.width - masterViewFrame.size.width - 1, detailViewFrame.size.height}};
+            frame = (CGRect){{masterViewFrame.size.width + 1.f, 0.f}, {self.view.bounds.size.width - masterViewFrame.size.width - 1.f, detailViewFrame.size.height}};
 
             break;
         }
@@ -499,10 +499,10 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 
     if (animated) {
         [UIView animateWithDuration:self.masterViewAnimationDuration
-                              delay:0.0
+                              delay:0.f
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
-                             self.detailDimmingView.alpha = 1.0;
+                             self.detailDimmingView.alpha = 1.f;
 
                              self.masterViewController.view.frame = [self masterViewFrameForState:BDBMasterViewStateVisible];
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateVisible];
@@ -551,10 +551,10 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 
     if (animated) {
         [UIView animateWithDuration:self.masterViewAnimationDuration
-                              delay:0.0
+                              delay:0.f
                             options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
-                             self.detailDimmingView.alpha = 0.0;
+                             self.detailDimmingView.alpha = 0.f;
 
                              self.masterViewController.view.frame = [self masterViewFrameForState:BDBMasterViewStateHidden];
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateHidden];
