@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, BDBMasterViewState) {
 };
 
 
-static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
+static void     * const kBDBSplitViewControllerKVOContext = (void *)&kBDBSplitViewControllerKVOContext;
+static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 
 
 #pragma mark -
@@ -139,7 +140,9 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
 #pragma mark View Lifecycle
 - (void)dealloc
 {
-    [self.detailViewController removeObserver:self forKeyPath:@"view.frame" context:kBDBSplitViewKVOContext];
+    [self.detailViewController removeObserver:self
+                                   forKeyPath:kBDBSplitViewControllerKVOKeyPath
+                                      context:kBDBSplitViewControllerKVOContext];
 }
 
 - (void)awakeFromNib
@@ -201,8 +204,8 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if (context == kBDBSplitViewKVOContext) {
-        if ([object isEqual:self.detailViewController] && [keyPath isEqualToString:@"view.frame"]) {
+    if (context == kBDBSplitViewControllerKVOContext) {
+        if ([object isEqual:self.detailViewController] && [keyPath isEqualToString:kBDBSplitViewControllerKVOKeyPath]) {
             UIView *view = self.detailViewController.view;
 
             CGRect currentFrame = [change[@"new"] CGRectValue];
@@ -308,16 +311,16 @@ static void * const kBDBSplitViewKVOContext = (void *)&kBDBSplitViewKVOContext;
     if (![viewControllers isEqualToArray:self.viewControllers]) {
         self.delegate = nil;
         [self.detailViewController removeObserver:self
-                                       forKeyPath:@"view.frame"
-                                          context:kBDBSplitViewKVOContext];
+                                       forKeyPath:kBDBSplitViewControllerKVOKeyPath
+                                          context:kBDBSplitViewControllerKVOContext];
 
         [super setViewControllers:viewControllers];
     }
 
     [self.detailViewController addObserver:self
-                                forKeyPath:@"view.frame"
+                                forKeyPath:kBDBSplitViewControllerKVOKeyPath
                                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                                   context:kBDBSplitViewKVOContext];
+                                   context:kBDBSplitViewControllerKVOContext];
 
     UIViewController *dvc = viewControllers[1];
 
