@@ -295,8 +295,16 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
  *  Quickly access the owning split view controller of the current view controller.
  *
  *  @since 1.0.0
+ *  @deprecated Use bdb_splitViewController instead.
  */
-@property (nonatomic, readonly) BDBSplitViewController *splitViewController;
+@property (nonatomic, readonly) BDBSplitViewController *splitViewController DEPRECATED_MSG_ATTRIBUTE("Use bdb_splitViewController instead.");
+
+/**
+ *  Quickly access the owning split view controller of the current view controller.
+ *
+ *  @since 1.4
+ */
+@property (nonatomic, readonly) BDBSplitViewController *bdb_splitViewController;
 
 @end
 
