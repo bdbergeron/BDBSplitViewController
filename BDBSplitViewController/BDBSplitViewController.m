@@ -517,6 +517,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
                              self.masterViewController.view.frame = [self masterViewFrameForState:BDBMasterViewStateVisible];
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateVisible];
 
+                             [self.masterViewController.view layoutIfNeeded];
                              [self.detailViewController.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
@@ -573,6 +574,7 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
                              self.masterViewController.view.frame = [self masterViewFrameForState:BDBMasterViewStateHidden];
                              self.detailViewController.view.frame = [self detailViewFrameForState:BDBMasterViewStateHidden];
 
+                             [self.masterViewController.view layoutIfNeeded];
                              [self.detailViewController.view layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
