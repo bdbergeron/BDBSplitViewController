@@ -102,8 +102,6 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     self = [self initWithMasterViewController:mvc detailViewController:dvc];
 
     if (self) {
-        [self setupWithViewControllers:@[mvc, dvc]];
-
         _masterViewDisplayStyle = style;
     }
 
