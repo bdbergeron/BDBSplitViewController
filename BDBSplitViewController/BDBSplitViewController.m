@@ -323,25 +323,16 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     NSParameterAssert(viewControllers);
     NSAssert(viewControllers.count == 2, @"viewControllers array must conatin both a master view controller and a detail view controller.");
 
-    if (![viewControllers isEqualToArray:self.viewControllers]) {
-        self.delegate = nil;
-        [self.detailViewController removeObserver:self
-                                       forKeyPath:kBDBSplitViewControllerKVOKeyPath
-                                          context:kBDBSplitViewControllerKVOContext];
+    [self.detailViewController removeObserver:self
+                                   forKeyPath:kBDBSplitViewControllerKVOKeyPath
+                                      context:kBDBSplitViewControllerKVOContext];
 
-        [super setViewControllers:viewControllers];
-    }
+    [super setViewControllers:viewControllers];
 
     [self.detailViewController addObserver:self
                                 forKeyPath:kBDBSplitViewControllerKVOKeyPath
                                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                                    context:kBDBSplitViewControllerKVOContext];
-
-    UIViewController *dvc = viewControllers[1];
-
-    if ([dvc isKindOfClass:[BDBDetailViewController class]]) {
-        self.delegate = (BDBDetailViewController *)dvc;
-    }
 
     [self configureMasterView];
 }
@@ -645,6 +636,13 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 
 #pragma mark -
 @implementation BDBDetailViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    self.bdb_splitViewController.delegate = self;
+}
 
 - (BOOL)splitViewController:(BDBSplitViewController *)svc
    shouldHideViewController:(UIViewController *)vc
