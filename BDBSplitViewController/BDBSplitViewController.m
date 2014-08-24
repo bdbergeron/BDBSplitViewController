@@ -323,16 +323,20 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     NSParameterAssert(viewControllers);
     NSAssert(viewControllers.count == 2, @"viewControllers array must conatin both a master view controller and a detail view controller.");
 
-    [self.detailViewController removeObserver:self
-                                   forKeyPath:kBDBSplitViewControllerKVOKeyPath
-                                      context:kBDBSplitViewControllerKVOContext];
+    UIViewController *newDetailVC = viewControllers[1];
+
+    if (self.detailViewController && ![self.detailViewController isEqual:newDetailVC]) {
+        [self.detailViewController removeObserver:self
+                                       forKeyPath:kBDBSplitViewControllerKVOKeyPath
+                                          context:kBDBSplitViewControllerKVOContext];
+    }
 
     [super setViewControllers:viewControllers];
 
-    [self.detailViewController addObserver:self
-                                forKeyPath:kBDBSplitViewControllerKVOKeyPath
-                                   options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                                   context:kBDBSplitViewControllerKVOContext];
+    [newDetailVC addObserver:self
+                  forKeyPath:kBDBSplitViewControllerKVOKeyPath
+                     options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                     context:kBDBSplitViewControllerKVOContext];
 
     [self configureMasterView];
 }
