@@ -266,8 +266,16 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 {
     if (!_showHideMasterViewButtonItem) {
         NSString *buttonTitle = (self.masterViewIsHidden) ?
-            NSLocalizedStringFromTable(@"Show", @"BDBSplitViewController", nil) :
-            NSLocalizedStringFromTable(@"Hide", @"BDBSplitViewController", nil);
+            NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerShowButtonTitle",
+                                              @"BDBSplitViewController",
+                                              [NSBundle mainBundle],
+                                              @"Show",
+                                              @"Show/Hide button title when master view is hidden.") :
+            NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerHideButtonTitle",
+                                              @"BDBSplitViewController",
+                                              [NSBundle mainBundle],
+                                              @"Hide",
+                                              @"Show/Hide button title when master view is visible.");
 
         _showHideMasterViewButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonTitle
                                                                          style:UIBarButtonItemStyleBordered
@@ -282,7 +290,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 {
     if (!_closeMasterViewButtonItem) {
         _closeMasterViewButtonItem =
-            [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"Close", @"BDBSplitViewController", nil)
+            [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerCloseButtonTitle",
+                                                                                     @"BDBSplitViewController",
+                                                                                     [NSBundle mainBundle],
+                                                                                     @"Close",
+                                                                                     @"Close button title.")
                                              style:UIBarButtonItemStyleBordered
                                             target:self
                                             action:@selector(closeMasterView:)];
@@ -525,7 +537,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 - (void)didShowMasterViewController:(BOOL)animated
                          completion:(void (^)(void))completion
 {
-    self.showHideMasterViewButtonItem.title = NSLocalizedStringFromTable(@"Hide", @"BDBSplitViewController", nil);
+    self.showHideMasterViewButtonItem.title =   NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerHideButtonTitle",
+                                                                                  @"BDBSplitViewController",
+                                                                                  [NSBundle mainBundle],
+                                                                                  @"Hide",
+                                                                                  @"Show/Hide button title when master view is visible.");
 
     [self.masterViewController viewDidAppear:animated];
     [self.view setNeedsLayout];
@@ -582,7 +598,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     self.detailDimmingView.hidden = YES;
     self.detailTapGesture.enabled = NO;
 
-    self.showHideMasterViewButtonItem.title = NSLocalizedStringFromTable(@"Show", @"BDBSplitViewController", nil);
+    self.showHideMasterViewButtonItem.title = NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerHideButtonTitle",
+                                                                                @"BDBSplitViewController",
+                                                                                [NSBundle mainBundle],
+                                                                                @"Hide",
+                                                                                @"Show/Hide button title when master view is visible.");
 
     [self.masterViewController viewDidDisappear:animated];
     [self.view setNeedsLayout];
