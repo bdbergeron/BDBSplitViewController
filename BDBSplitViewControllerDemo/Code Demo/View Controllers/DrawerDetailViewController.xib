@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DrawerDetailViewController">
             <connections>
-                <outlet property="github" destination="4EF-eG-kgk" id="GSm-s7-gtl"/>
-                <outlet property="view" destination="1" id="kBb-c1-4b2"/>
+                <outlet property="githubView" destination="cDb-37-b28" id="Mpf-I2-UXR"/>
+                <outlet property="view" destination="NV7-PL-efb" id="ioY-Ds-PUe"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+        <view contentMode="scaleToFill" id="NV7-PL-efb">
+            <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxI-wg-29s">
-                    <rect key="frame" x="260" y="414" width="248" height="175"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mx6-xz-LLs">
+                    <rect key="frame" x="255" y="412" width="259" height="180"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="208" translatesAutoresizingMaskIntoConstraints="NO" id="iup-py-cOU" userLabel="Label - BDBPopupViewController  © 2013 Bradley David Bergeron">
-                            <rect key="frame" x="20" y="20" width="208" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="219" translatesAutoresizingMaskIntoConstraints="NO" id="2X5-3j-KYT" userLabel="Label - BDBPopupViewController  © 2013 Bradley David Bergeron">
+                            <rect key="frame" x="20" y="20" width="219" height="42"/>
                             <attributedString key="attributedText">
                                 <fragment content="BDBPopupViewController">
                                     <attributes>
@@ -36,14 +34,14 @@
 Cg
 </string>
                                     <attributes>
-                                        <color key="NSColor" white="0.38406706200000001" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSColor" white="0.38406706204379559" alpha="1" colorSpace="calibratedWhite"/>
                                         <font key="NSFont" size="15" name="HelveticaNeue"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5"/>
                                     </attributes>
                                 </fragment>
-                                <fragment content="© 2013 Bradley David Bergeron">
+                                <fragment content="© 2013-2014 Bradley David Bergeron">
                                     <attributes>
-                                        <color key="NSColor" white="0.26074931569999998" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="NSColor" white="0.26074931569343068" alpha="1" colorSpace="calibratedWhite"/>
                                         <font key="NSFont" size="13" name="HelveticaNeue"/>
                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                     </attributes>
@@ -51,38 +49,49 @@ Cg
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EF-eG-kgk">
-                            <rect key="frame" x="44" y="102" width="160" height="53"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDb-37-b28">
+                            <rect key="frame" x="50" y="102" width="159" height="58"/>
                             <subviews>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="githubIcon" translatesAutoresizingMaskIntoConstraints="NO" id="WmN-cy-5Km">
+                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="githubIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CDU-Yq-vNh">
                                     <rect key="frame" x="65" y="0.0" width="30" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="github.com/bdbergeron" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="RDm-Vr-lpN">
-                                    <rect key="frame" x="0.0" y="35" width="160" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="github.com/bdbergeron" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-0I-Mwm">
+                                    <rect key="frame" x="0.0" y="40" width="159" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="eAr-0I-Mwm" firstAttribute="leading" secondItem="cDb-37-b28" secondAttribute="leading" id="DVb-FH-pKA"/>
+                                <constraint firstAttribute="centerX" secondItem="CDU-Yq-vNh" secondAttribute="centerX" id="EbX-Wl-Ryr"/>
+                                <constraint firstAttribute="centerX" secondItem="eAr-0I-Mwm" secondAttribute="centerX" id="KZ4-9f-DH5"/>
+                                <constraint firstItem="eAr-0I-Mwm" firstAttribute="top" secondItem="CDU-Yq-vNh" secondAttribute="bottom" constant="10" id="ZrG-Ma-Qas"/>
+                                <constraint firstItem="CDU-Yq-vNh" firstAttribute="top" secondItem="cDb-37-b28" secondAttribute="top" id="pHG-7a-Tw2"/>
+                                <constraint firstAttribute="bottom" secondItem="eAr-0I-Mwm" secondAttribute="bottom" id="pKm-7K-TN4"/>
+                                <constraint firstAttribute="trailing" secondItem="eAr-0I-Mwm" secondAttribute="trailing" id="pPp-ae-IGZ"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="248" id="CSg-oE-SN9"/>
-                        <constraint firstAttribute="height" constant="175" id="eee-an-gLx"/>
+                        <constraint firstItem="cDb-37-b28" firstAttribute="top" secondItem="2X5-3j-KYT" secondAttribute="bottom" constant="40" id="EBb-7i-lTW"/>
+                        <constraint firstItem="2X5-3j-KYT" firstAttribute="top" secondItem="mx6-xz-LLs" secondAttribute="top" constant="20" id="cLs-KG-buo"/>
+                        <constraint firstAttribute="centerX" secondItem="cDb-37-b28" secondAttribute="centerX" id="d72-44-N3F"/>
+                        <constraint firstAttribute="trailing" secondItem="2X5-3j-KYT" secondAttribute="trailing" constant="20" id="qsS-8x-KIa"/>
+                        <constraint firstItem="2X5-3j-KYT" firstAttribute="leading" secondItem="mx6-xz-LLs" secondAttribute="leading" constant="20" id="uGC-gS-oU4"/>
+                        <constraint firstAttribute="bottom" secondItem="cDb-37-b28" secondAttribute="bottom" constant="20" id="y8v-x7-u7c"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.88649525490000003" green="0.26784711880000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="cxI-wg-29s" secondAttribute="centerX" id="0Vw-45-oWu"/>
-                <constraint firstAttribute="centerY" secondItem="cxI-wg-29s" secondAttribute="centerY" id="GZa-en-3qf"/>
+                <constraint firstAttribute="centerX" secondItem="mx6-xz-LLs" secondAttribute="centerX" id="0w8-mG-SwC"/>
+                <constraint firstAttribute="centerY" secondItem="mx6-xz-LLs" secondAttribute="centerY" id="ZsN-O2-moA"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>

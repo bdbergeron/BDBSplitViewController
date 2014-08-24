@@ -1,0 +1,14 @@
+PODS:
+  - BDBSplitViewController (1.3.1)
+
+DEPENDENCIES:
+  - BDBSplitViewController (from `../`)
+
+EXTERNAL SOURCES:
+  BDBSplitViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  BDBSplitViewController: 03f9b4351c7bc0733c52f7793c3605ab1523c9db
+
+COCOAPODS: 0.33.1

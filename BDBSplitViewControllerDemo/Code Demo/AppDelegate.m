@@ -1,7 +1,7 @@
 //
 //  AppDelegate.m
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -31,14 +31,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    BDBSplitViewController *splitVC =
+        [BDBSplitViewController splitViewWithMasterViewController:[MasterViewController new]
+                                             detailViewController:[[UINavigationController alloc] initWithRootViewController:[NormalDetailViewController new]]];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-
-    BDBSplitViewController *splitVC = [BDBSplitViewController splitViewWithMasterViewController:[MasterViewController new]
-                                                                           detailViewController:[NormalDetailViewController new]];
-
     self.window.rootViewController = splitVC;
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 

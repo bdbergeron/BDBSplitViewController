@@ -1,7 +1,7 @@
 //
 //  StickyDetailViewController.m
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -23,6 +23,9 @@
 #import "StickyDetailViewController.h"
 
 
+static NSString * const kTwitterURL = @"https://twitter.com/bradbergeron";
+
+
 #pragma mark -
 @implementation StickyDetailViewController
 
@@ -30,22 +33,22 @@
 {
     [super viewDidLoad];
 
-    self.title = @"Sticky";
+    self.title = NSLocalizedString(@"Sticky", nil);
 
-    [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleSticky animated:YES];
-    self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
+    [self.bdb_splitViewController setMasterViewDisplayStyle:BDBSplitViewControllerMasterDisplayStyleSticky animated:YES];
+    self.navigationItem.leftBarButtonItem = self.bdb_splitViewController.showHideMasterViewButtonItem;
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.f) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
 
-    [self.twitter addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
+    [self.twitterView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
 }
 
 - (void)infoItemTapped:(UITapGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/bradbergeron"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kTwitterURL]];
     }
 }
 

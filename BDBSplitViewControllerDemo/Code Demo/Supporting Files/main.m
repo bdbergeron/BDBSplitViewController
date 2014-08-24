@@ -1,7 +1,7 @@
 //
 //  main.m
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -20,9 +20,10 @@
 //  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "AppDelegate.h"
+
 
 int main(int argc, char * argv[])
 {

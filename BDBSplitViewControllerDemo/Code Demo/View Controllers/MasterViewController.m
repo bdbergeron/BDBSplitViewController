@@ -1,7 +1,7 @@
 //
 //  MasterViewController.m
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -20,8 +20,11 @@
 //  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MasterViewController.h"
 #import "BDBSplitViewController.h"
+#import "DrawerDetailViewController.h"
+#import "MasterViewController.h"
+#import "NormalDetailViewController.h"
+#import "StickyDetailViewController.h"
 
 
 #pragma mark -
@@ -30,12 +33,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Master View";
 
-    self.navigationItem.leftBarButtonItem = self.splitViewController.closeMasterViewButtonItem;
+    self.title = NSLocalizedString(@"Master View", nil);
 
-    self.tableView.rowHeight = 90.0f;
+    self.tableView.rowHeight = 90.f;
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    if (self.bdb_splitViewController.masterViewDisplayStyle == BDBSplitViewControllerMasterDisplayStyleDrawer) {
+        self.tableView.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.6f];
+    } else {
+        self.tableView.backgroundColor = [UIColor whiteColor];
+    }
+}
+
 
 #pragma mark UITableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -52,20 +66,23 @@
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
 
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = [UIColor clearColor];
+
     switch (indexPath.row) {
         case 2: {
-            cell.textLabel.text = @"Drawer Style";
+            cell.textLabel.text = NSLocalizedString(@"Drawer Style", nil);
 
             break;
         }
         case 1: {
-            cell.textLabel.text = @"Sticky Style";
+            cell.textLabel.text = NSLocalizedString(@"Sticky Style", nil);
 
             break;
         }
         case 0:
         default: {
-            cell.textLabel.text = @"Normal Style";
+            cell.textLabel.text = NSLocalizedString(@"Normal Style", nil);
 
             break;
         }
@@ -76,36 +93,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BDBDetailViewController *detailView;
+    BDBDetailViewController *detailVC;
 
     switch (indexPath.row) {
         case 2: {
-            detailView = [NSClassFromString(@"DrawerDetailViewController") new];
+            detailVC = [DrawerDetailViewController new];
 
             break;
         }
         case 1: {
-            detailView = [NSClassFromString(@"StickyDetailViewController") new];
+            detailVC = [StickyDetailViewController new];
 
             break;
         }
         case 0:
         default: {
-            detailView = [NSClassFromString(@"NormalDetailViewController") new];
-
-            break;
+            detailVC = [NormalDetailViewController new];
         }
     }
 
-    UIViewController *currentDetailView = [(UINavigationController *)self.splitViewController.detailViewController topViewController];
+    UINavigationController *detailNavVC = (UINavigationController *)self.bdb_splitViewController.detailViewController;
 
-    if (![currentDetailView isKindOfClass:[detailView class]]) {
-        if (self.splitViewController.masterViewDisplayStyle == BDBMasterViewDisplayStyleDrawer || indexPath.row == 2) {
-            [self.splitViewController hideMasterViewControllerAnimated:YES completion:^{
-                [self.splitViewController setDetailViewController:detailView];
+    UIViewController *currentDetailVC = detailNavVC.topViewController;
+
+    if (![currentDetailVC isKindOfClass:[detailVC class]]) {
+        if (self.bdb_splitViewController.masterViewDisplayStyle == BDBSplitViewControllerMasterDisplayStyleDrawer || indexPath.row == 2) {
+            [self.bdb_splitViewController hideMasterViewControllerAnimated:YES completion:^{
+                detailNavVC.viewControllers = @[detailVC];
             }];
         } else {
-            [self.splitViewController setDetailViewController:detailView];
+            detailNavVC.viewControllers = @[detailVC];
         }
     }
 }

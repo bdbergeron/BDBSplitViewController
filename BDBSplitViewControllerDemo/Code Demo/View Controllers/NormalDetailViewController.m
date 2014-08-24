@@ -1,7 +1,7 @@
 //
 //  NormalDetailViewController.m
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -23,6 +23,9 @@
 #import "NormalDetailViewController.h"
 
 
+static NSString * const kWebsiteURL = @"http://bradbergeron.com";
+
+
 #pragma mark -
 @implementation NormalDetailViewController
 
@@ -30,22 +33,22 @@
 {
     [super viewDidLoad];
 
-    self.title = @"Normal";
+    self.title = NSLocalizedString(@"Normal", nil);
 
-    [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleNormal animated:YES];
-    self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
+    [self.bdb_splitViewController setMasterViewDisplayStyle:BDBSplitViewControllerMasterDisplayStyleNormal animated:YES];
+    self.navigationItem.leftBarButtonItem = self.bdb_splitViewController.showHideMasterViewButtonItem;
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.f) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
 
-    [self.website addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
+    [self.websiteView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
 }
 
 - (void)infoItemTapped:(UITapGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://bradbergeron.com"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kWebsiteURL]];
     }
 }
 

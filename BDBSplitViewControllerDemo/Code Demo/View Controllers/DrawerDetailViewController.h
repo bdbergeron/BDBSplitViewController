@@ -1,7 +1,7 @@
 //
 //  DrawerDetailViewController.h
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -27,8 +27,7 @@
 
 #pragma mark -
 @interface DrawerDetailViewController : BDBDetailViewController
-<UISplitViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *github;
+@property (nonatomic, weak) IBOutlet UIView *githubView;
 
 @end

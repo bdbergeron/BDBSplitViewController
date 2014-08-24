@@ -1,7 +1,7 @@
 //
 //  DrawerDetailViewController.m
 //
-//  Copyright (c) 2013 Bradley David Bergeron
+//  Copyright (c) 2013-2014 Bradley David Bergeron
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of
 //  this software and associated documentation files (the "Software"), to deal in
@@ -23,6 +23,9 @@
 #import "DrawerDetailViewController.h"
 
 
+static NSString * const kGithubURL = @"https://github.com/bdbergeron";
+
+
 #pragma mark -
 @implementation DrawerDetailViewController
 
@@ -30,22 +33,22 @@
 {
     [super viewDidLoad];
 
-    self.title = @"Drawer";
+    self.title = NSLocalizedString(@"Drawer", nil);
 
-    [self.splitViewController setMasterViewDisplayStyle:BDBMasterViewDisplayStyleDrawer animated:YES];
-    self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
+    [self.bdb_splitViewController setMasterViewDisplayStyle:BDBSplitViewControllerMasterDisplayStyleDrawer animated:YES];
+    self.navigationItem.leftBarButtonItem = self.bdb_splitViewController.showHideMasterViewButtonItem;
 
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.f) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
 
-    [self.github addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
+    [self.githubView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(infoItemTapped:)]];
 }
 
 - (void)infoItemTapped:(UITapGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://github.com/bdbergeron"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kGithubURL]];
     }
 }
 

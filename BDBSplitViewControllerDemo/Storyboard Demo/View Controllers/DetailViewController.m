@@ -38,8 +38,10 @@
 {
     [super viewDidLoad];
 
-    self.splitViewController.masterViewDisplayStyle = BDBMasterViewDisplayStyleDrawer;
-    self.navigationItem.leftBarButtonItem = self.splitViewController.showHideMasterViewButtonItem;
+    self.bdb_splitViewController.masterViewDisplayStyle = BDBSplitViewControllerMasterDisplayStyleSticky;
+    [self.bdb_splitViewController showMasterViewControllerAnimated:NO completion:nil];
+
+    self.navigationItem.leftBarButtonItem = self.bdb_splitViewController.showHideMasterViewButtonItem;
 
     [self configureView];
 }

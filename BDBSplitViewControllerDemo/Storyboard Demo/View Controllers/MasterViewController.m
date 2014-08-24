@@ -20,9 +20,8 @@
 //  IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "MasterViewController.h"
-
 #import "DetailViewController.h"
+#import "MasterViewController.h"
 
 
 #pragma mark -
@@ -30,7 +29,7 @@
 
 @property (nonatomic) NSMutableArray *objects;
 
-@property (nonatomic, retain) DetailViewController *detailViewController;
+@property (nonatomic) DetailViewController *detailViewController;
 
 @end
 
@@ -49,7 +48,7 @@
                                                                                action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
 
-    self.detailViewController = (DetailViewController *)self.splitViewController.detailViewController;
+    self.detailViewController = (DetailViewController *)((UINavigationController *)self.bdb_splitViewController.detailViewController).topViewController;
 }
 
 - (void)insertNewObject:(id)sender
