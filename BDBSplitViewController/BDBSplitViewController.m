@@ -108,15 +108,12 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)awakeFromNib
 {
-    self = [super initWithCoder:aDecoder];
+    [super awakeFromNib];
 
-    if (self) {
-        [self setupWithViewControllers:self.viewControllers];
-    }
-
-    return self;
+    [self setupWithViewControllers:self.viewControllers];
+    [self initialize];
 }
 
 - (void)setupWithViewControllers:(NSArray *)viewControllers
@@ -141,13 +138,6 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     [self.detailViewController removeObserver:self
                                    forKeyPath:kBDBSplitViewControllerKVOKeyPath
                                       context:kBDBSplitViewControllerKVOContext];
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-
-    [self initialize];
 }
 
 - (void)viewDidLoad

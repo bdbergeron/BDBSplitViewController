@@ -23,6 +23,17 @@
 @import UIKit;
 
 
+#ifndef NS_DESIGNATED_INITIALIZER
+
+#if __has_attribute(objc_designated_initializer)
+#define NS_DESIGNATED_INITIALIZER __attribute__((objc_designated_initializer))
+#else
+#define NS_DESIGNATED_INITIALIZER
+#endif
+
+#endif
+
+
 @protocol BDBSplitViewControllerDelegate;
 
 /**
@@ -185,7 +196,7 @@ typedef NS_ENUM(NSInteger, BDBSplitViewControllerMasterDisplayStyle) {
  *  @since 1.0.0
  */
 - (instancetype)initWithMasterViewController:(UIViewController *)mvc
-                        detailViewController:(UIViewController *)dvc;
+                        detailViewController:(UIViewController *)dvc NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Initialize a new split view controller instance with the given master and detail view 
