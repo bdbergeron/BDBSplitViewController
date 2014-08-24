@@ -526,11 +526,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
 - (void)didShowMasterViewController:(BOOL)animated
                          completion:(void (^)(void))completion
 {
-    self.showHideMasterViewButtonItem.title =   NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerHideButtonTitle",
-                                                                                  @"BDBSplitViewController",
-                                                                                  [NSBundle mainBundle],
-                                                                                  @"Hide",
-                                                                                  @"Show/Hide button title when master view is visible.");
+    self.showHideMasterViewButtonItem.title = NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerHideButtonTitle",
+                                                                                @"BDBSplitViewController",
+                                                                                [NSBundle mainBundle],
+                                                                                @"Hide",
+                                                                                @"Show/Hide button title when master view is visible.");
 
     [self.masterViewController viewDidAppear:animated];
     [self.view setNeedsLayout];
@@ -587,11 +587,11 @@ static NSString * const kBDBSplitViewControllerKVOKeyPath = @"view.frame";
     self.detailDimmingView.hidden = YES;
     self.detailTapGesture.enabled = NO;
 
-    self.showHideMasterViewButtonItem.title = NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerHideButtonTitle",
+    self.showHideMasterViewButtonItem.title = NSLocalizedStringWithDefaultValue(@"BDBSplitViewControllerShowButtonTitle",
                                                                                 @"BDBSplitViewController",
                                                                                 [NSBundle mainBundle],
-                                                                                @"Hide",
-                                                                                @"Show/Hide button title when master view is visible.");
+                                                                                @"Show",
+                                                                                @"Show/Hide button title when master view is hidden.");
 
     [self.masterViewController viewDidDisappear:animated];
     [self.view setNeedsLayout];
